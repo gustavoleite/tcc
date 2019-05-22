@@ -20,7 +20,7 @@ class ProgressComponent @JvmOverloads constructor(
 
     init {
         inflateLayout(context)
-        setAtrributes(attrs, context)
+        loadAtrributes(attrs, context)
     }
 
     private fun inflateLayout(context: Context) {
@@ -31,7 +31,7 @@ class ProgressComponent @JvmOverloads constructor(
         orientation = VERTICAL
     }
 
-    private fun setAtrributes(attrs: AttributeSet?, context: Context) {
+    private fun loadAtrributes(attrs: AttributeSet?, context: Context) {
         attrs?.let {
             with(
                 context.obtainStyledAttributes(
