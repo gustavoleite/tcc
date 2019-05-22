@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/home_progress_component" />
 
-    <gustavo.guterres.leite.tcc.components.progress.ProgressComponent
+    <gustavo.guterres.leite.tcc.components.progress.ProgressView
         android:id="@+id/home_progress_component"
         android:layout_width="0dp"
         android:layout_height="26dp"
