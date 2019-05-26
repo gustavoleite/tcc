@@ -7,45 +7,20 @@
     android:background="@drawable/pattern_background"
     tools:context=".feature.HomeActivity">
 
-    <ImageView
-        android:id="@+id/home_close"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:src="@drawable/ic_round_cancel"
-        app:layout_constraintBottom_toBottomOf="@+id/home_progress_component"
-        app:layout_constraintEnd_toStartOf="@+id/home_progress_component"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_progress_component" />
-
-    <gustavo.guterres.leite.tcc.components.progress.ProgressComponent
-        android:id="@+id/home_progress_component"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        app:backgroundDrawable="@drawable/load_progress"
-        app:currentProgress="60"
-        app:layout_constraintEnd_toStartOf="@+id/home_money_icon"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/home_close"
-        app:layout_constraintTop_toTopOf="parent"
-        app:text="5/10"
-        app:textColor="@color/primaryTextColor"
-        app:textSize="12sp" />
-
-    <ImageView
-        android:id="@+id/home_money_icon"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_monetization"
-        app:layout_constraintBottom_toBottomOf="@+id/home_progress_component"
+    <gustavo.guterres.leite.tcc.components.feedback.FeedbackView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/home_progress_component"
-        app:layout_constraintTop_toTopOf="@+id/home_progress_component" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pvBackgroundDrawable="@drawable/load_progress"
+        app:pvCurrentProgress="50"
+        app:pvText="7/10"
+        app:pvTextColor="@color/primaryColor"
+        app:pvTextSize="14sp"
+        app:startButtonDrawable="@drawable/ic_round_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
