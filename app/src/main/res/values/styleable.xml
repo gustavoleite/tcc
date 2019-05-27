@@ -24,4 +24,10 @@
         <attr name="endButtonTextSize" format="dimension" />
         <attr name="endButtonTextColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="ContentView">
+        <attr name="cvText" format="string" />
+        <attr name="cvTextColor" format="color" />
+        <attr name="cvTextSize" format="dimension" />
+    </declare-styleable>
 </resources>
