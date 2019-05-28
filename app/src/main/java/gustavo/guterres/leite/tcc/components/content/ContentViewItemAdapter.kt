@@ -1,15 +1,15 @@
 package gustavo.guterres.leite.tcc.components.content
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.databinding.ComponentContentItemBinding
-import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProviderImpl
+import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 
-class ContentViewItemAdapter(private val context: Context) : RecyclerView.Adapter<ContentViewItemAdapter.ViewHolder>() {
+class ContentViewItemAdapter(private val resourceProvider: ResourceProvider) :
+    RecyclerView.Adapter<ContentViewItemAdapter.ViewHolder>() {
 
     var list: List<ContentViewItem> = emptyList()
         set(value) {
@@ -19,7 +19,7 @@ class ContentViewItemAdapter(private val context: Context) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
-        val viewModel = ContentViewItemViewModel(list[position], ResourceProviderImpl(context))
+        val viewModel = ContentViewItemViewModel(list[position], resourceProvider)
         binding.viewModel = viewModel
     }
 

@@ -11,15 +11,16 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import gustavo.guterres.leite.tcc.R
 import kotlinx.android.synthetic.main.component_content_view.view.*
-import kotlinx.android.synthetic.main.component_feedback_view.view.*
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
 class ContentView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr), KoinComponent {
 
-    private lateinit var listAdapter: ContentViewItemAdapter
+    private val listAdapter : ContentViewItemAdapter by inject()
 
     init {
         inflateLayout(context)
@@ -73,8 +74,6 @@ class ContentView @JvmOverloads constructor(
     }
 
     private fun setupList(context: Context) {
-        listAdapter = ContentViewItemAdapter(context)
-
         cv_recycler_view.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listAdapter
