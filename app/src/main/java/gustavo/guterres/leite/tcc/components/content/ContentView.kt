@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import gustavo.guterres.leite.tcc.R
@@ -20,7 +21,7 @@ class ContentView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), KoinComponent {
 
-    private val listAdapter : ContentViewItemAdapter by inject()
+    private val listAdapter: ContentViewItemAdapter by inject()
 
     init {
         inflateLayout(context)
@@ -59,7 +60,7 @@ class ContentView @JvmOverloads constructor(
         )
     }
 
-    fun setTextData(textLabel: String?, @ColorInt textColor: Int, textSize: Float) {
+    fun setTextData(textLabel: String?, @ColorInt textColor: Int, @Dimension textSize: Float) {
         cv_title.apply {
             text = textLabel
             takeIf { textColor != 0 }

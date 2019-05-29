@@ -7,6 +7,10 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        setupDepedencyInjector()
+    }
+
+    private fun setupDepedencyInjector() {
         startKoin(
             this,
             listOf(
