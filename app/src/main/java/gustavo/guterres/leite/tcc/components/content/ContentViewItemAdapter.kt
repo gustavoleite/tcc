@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import gustavo.guterres.leite.tcc.R
-import gustavo.guterres.leite.tcc.databinding.ComponentContentItemBinding
+import gustavo.guterres.leite.tcc.databinding.ItemContentBinding
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 
 class ContentViewItemAdapter(private val resourceProvider: ResourceProvider) :
@@ -26,9 +26,9 @@ class ContentViewItemAdapter(private val resourceProvider: ResourceProvider) :
     override fun getItemCount(): Int = list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = DataBindingUtil.inflate<ComponentContentItemBinding>(
+        val binding = DataBindingUtil.inflate<ItemContentBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.component_content_item,
+            R.layout.item_content,
             parent,
             false
         )
@@ -36,5 +36,5 @@ class ContentViewItemAdapter(private val resourceProvider: ResourceProvider) :
         return ViewHolder(binding)
     }
 
-    class ViewHolder(val binding: ComponentContentItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemContentBinding) : RecyclerView.ViewHolder(binding.root)
 }

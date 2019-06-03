@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/pattern_background"
-    tools:context=".feature.HomeActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <gustavo.guterres.leite.tcc.components.feedback.FeedbackView
-        android:id="@+id/home_feedback_view"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gustavo.guterres.leite.tcc.feature.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:pvBackgroundDrawable="@drawable/load_progress"
-        app:pvCurrentProgress="50"
-        app:pvText="7/10"
-        app:pvTextColor="@color/primaryColor"
-        app:pvTextSize="14sp"
-        app:startButtonDrawable="@drawable/ic_round_cancel" />
+        android:layout_height="match_parent"
+        android:background="@drawable/pattern_background"
+        tools:context=".feature.HomeActivity">
 
-    <gustavo.guterres.leite.tcc.components.content.ContentView
-        android:id="@+id/home_content_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cvText="Ola mundo :)"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_feedback_view"
-        app:layout_constraintVertical_bias="0.0" />
+        <gustavo.guterres.leite.tcc.components.feedback.FeedbackView
+            android:id="@+id/home_feedback_view"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pvBackgroundDrawable="@drawable/load_progress"
+            app:pvCurrentProgress="50"
+            app:pvText="7/10"
+            app:pvTextColor="@color/primaryColor"
+            app:pvTextSize="14sp"
+            app:startButtonDrawable="@drawable/ic_round_cancel" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <gustavo.guterres.leite.tcc.components.content.ContentView
+            android:id="@+id/home_content_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cvText="Ola mundo :)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_feedback_view"
+            app:layout_constraintVertical_bias="0.0"
+            app:setList="@{viewModel.contentList}"
+            tools:layout_height="200dp" />
+
+        <gustavo.guterres.leite.tcc.components.action.ActionView
+            android:id="@+id/home_action_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:setList="@{viewModel.actionList}"
+            app:avWidth="160dp"
+            app:avMarginHorizontal="6dp"
+            app:avTextColor="@android:color/white"
+            app:avBackgroundDrawable="@drawable/flat_button_background_selector"
+            app:avHeight="62dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -8,9 +8,10 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
-import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.databinding.ComponentContentViewBinding
 import kotlinx.android.synthetic.main.component_content_view.view.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
@@ -30,9 +31,10 @@ class ContentView @JvmOverloads constructor(
     }
 
     private fun inflateLayout(context: Context) {
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.component_content_view, this, true)
+        DataBindingUtil.inflate<ComponentContentViewBinding>(
+            LayoutInflater.from(context),
+            R.layout.component_content_view, this, true
+        )
 
         orientation = VERTICAL
     }
@@ -74,19 +76,14 @@ class ContentView @JvmOverloads constructor(
         }
     }
 
+    fun setList(items: List<ContentViewItem>) {
+        listAdapter.list = items
+    }
+
     private fun setupList(context: Context) {
         cv_recycler_view.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listAdapter
         }
-    }
-
-    fun setList(items: List<ContentViewItem>) {
-        listAdapter.list = items
-    }
-
-    @BindingAdapter("app:cvItems")
-    fun setCvItems(contentView: ContentView, items: List<ContentViewItem>) {
-        contentView.setList(items)
     }
 }
