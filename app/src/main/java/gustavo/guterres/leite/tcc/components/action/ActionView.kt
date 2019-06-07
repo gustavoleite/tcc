@@ -2,7 +2,6 @@ package gustavo.guterres.leite.tcc.components.action
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
-import androidx.databinding.BindingAdapter
+import androidx.annotation.DrawableRes
 import gustavo.guterres.leite.tcc.R
 import kotlinx.android.synthetic.main.component_action_view.view.*
 import org.koin.standalone.KoinComponent
@@ -22,8 +21,15 @@ class ActionView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), KoinComponent {
 
-    private lateinit var buttonLayout: Button
     private var actionClick: ((Action) -> Unit)? = null
+
+    private var drawableRes: Int = 0
+    private var textColor: Int = 0
+    private var textSize: Float = 0f
+    private var buttonWidth: Int = 0
+    private var buttonHeight: Int = 0
+    private var buttonMarginHorizontal: Int = 0
+    private var buttonMarginVertical: Int = 0
 
     var list: List<Action> = emptyList()
         set(value) {
@@ -64,7 +70,8 @@ class ActionView @JvmOverloads constructor(
             getLayoutDimension(R.styleable.ActionView_avWidth, ViewGroup.LayoutParams.WRAP_CONTENT),
             getLayoutDimension(R.styleable.ActionView_avHeight, ViewGroup.LayoutParams.WRAP_CONTENT),
             getDimensionPixelSize(R.styleable.ActionView_avMarginHorizontal, 0),
-            getDrawable(R.styleable.ActionView_avBackgroundDrawable),
+            getDimensionPixelSize(R.styleable.ActionView_avMarginVertical, 0),
+            getResourceId(R.styleable.ActionView_avBackgroundDrawable, -1),
             getColor(R.styleable.ActionView_avTextColor, 0),
             getDimension(R.styleable.ActionView_avTextSize, 0f)
         )
@@ -74,38 +81,60 @@ class ActionView @JvmOverloads constructor(
         @Dimension width: Int,
         @Dimension height: Int,
         @Dimension marginHorizontal: Int,
-        drawable: Drawable?,
+        @Dimension marginVertical: Int,
+        @DrawableRes drawableRes: Int,
         @ColorInt textColor: Int,
         @Dimension textSize: Float
     ) {
+        this.buttonWidth = width
+        this.buttonHeight = height
+        this.buttonMarginHorizontal = marginHorizontal
+        this.buttonMarginVertical = marginVertical
+        this.textColor = textColor
+        this.textSize = textSize
+        this.drawableRes = drawableRes
+    }
 
-        buttonLayout = Button(context).apply {
-            layoutParams = LayoutParams(width, height).apply { setMargins(marginHorizontal, 0, marginHorizontal, 0) }
-            background = drawable
-            takeIf { textColor != 0 }
-                ?.run {
-                    setTextColor(textColor)
-                }
-            takeIf { textSize != 0f }
-                ?.run {
-                    setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-                }
+
+    private fun buildView(list: List<Action>) {
+
+        list.forEachIndexed { index, action ->
+            if (index < FIRST_LINE_VIEW_LIMIT) {
+                av_first_line?.addView(buildButton(action))
+            } else if (index < SECOUND_LINE_VIEW_LIMIT) {
+                av_second_line?.addView(buildButton(action))
+            }
         }
     }
 
-    private fun buildView(list: List<Action>) {
-        for (action in list) {
-            av_container?.addView(Button(context).apply {
-                layoutParams = buttonLayout.layoutParams
-                buttonLayout.background?.let {
-                    background = it
+    private fun buildButton(action: Action): Button {
+
+        return Button(context).apply {
+            LayoutParams.MATCH_PARENT
+            layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
+                takeIf { buttonWidth == LayoutParams.WRAP_CONTENT }
+                    ?.run { weight = 1f }
+                setMargins(
+                    buttonMarginHorizontal,
+                    buttonMarginVertical,
+                    buttonMarginHorizontal,
+                    buttonMarginVertical
+                )
+            }
+            takeIf { this@ActionView.drawableRes != 0 }
+                ?.run {
+                    setBackgroundResource(drawableRes)
                 }
-                setTextColor(buttonLayout.currentTextColor)
-                setTextSize(TypedValue.COMPLEX_UNIT_PX, buttonLayout.textSize)
-                text = action.text
-                //setTag(BUTTON_TAG, action.id)
-                actionClick?.invoke(action)
-            })
+            takeIf { this@ActionView.textColor != 0 }
+                ?.run {
+                    setTextColor(textColor)
+                }
+            takeIf { this@ActionView.textSize != 0f }
+                ?.run {
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                }
+            text = action.text
+            setOnClickListener { actionClick?.invoke(action) }
         }
     }
 
@@ -114,6 +143,7 @@ class ActionView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val BUTTON_TAG = 1
+        private const val FIRST_LINE_VIEW_LIMIT = 3
+        private const val SECOUND_LINE_VIEW_LIMIT = 6
     }
 }

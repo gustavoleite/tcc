@@ -35,8 +35,9 @@
         <attr name="avWidth" format="dimension" />
         <attr name="avHeight" format="dimension" />
         <attr name="avMarginHorizontal" format="dimension" />
+        <attr name="avMarginVertical" format="dimension" />
         <attr name="avTextColor" format="color" />
         <attr name="avTextSize" format="dimension" />
-        <attr name="avBackgroundDrawable" format="integer" />
+        <attr name="avBackgroundDrawable" format="reference" />
     </declare-styleable>
 </resources>

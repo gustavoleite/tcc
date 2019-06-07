@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:pvBackgroundDrawable="@drawable/load_progress"
-            app:pvCurrentProgress="50"
+            app:pvCurrentProgress="80"
             app:pvText="7/10"
             app:pvTextColor="@color/primaryColor"
             app:pvTextSize="14sp"
@@ -48,16 +48,19 @@
             android:id="@+id/home_action_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:setList="@{viewModel.actionList}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:avBackgroundDrawable="@drawable/flat_button_background_selector"
+            app:avHeight="56dp"
             app:avWidth="160dp"
             app:avMarginHorizontal="6dp"
+            app:avMarginVertical="4dp"
             app:avTextColor="@android:color/white"
-            app:avBackgroundDrawable="@drawable/flat_button_background_selector"
-            app:avHeight="62dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setList="@{viewModel.actionList}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

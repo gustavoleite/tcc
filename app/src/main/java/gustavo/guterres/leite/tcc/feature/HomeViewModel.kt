@@ -14,10 +14,12 @@ class HomeViewModel : ViewModel() {
     )
 
     val actionList : List<Action> = listOf(
-        Action("sd2d2", text = "TEXT"),
-        Action("sd2d", text = "TEXT"),
-        Action("sd2d", text = "TEXT"),
-        Action("sd2d24", text = "TEXT")
+        Action("1", text = "TEXT"),
+        Action("2", text = "TEXT"),
+        Action("2", text = "TEXT"),
+        Action("2", text = "TEXT"),
+        Action("2", text = "TEXT"),
+        Action("3", text = "TEXT")
     )
 
     val text = "oi"
