@@ -30,37 +30,14 @@
             app:pvTextSize="14sp"
             app:startButtonDrawable="@drawable/ic_round_cancel" />
 
-        <gustavo.guterres.leite.tcc.components.content.ContentView
-            android:id="@+id/home_content_view"
+        <FrameLayout
+            android:id="@+id/home_container_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cvText="Ola mundo :)"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_feedback_view"
-            app:layout_constraintVertical_bias="0.0"
-            app:setList="@{viewModel.contentList}"
-            tools:layout_height="200dp" />
-
-        <gustavo.guterres.leite.tcc.components.action.ActionView
-            android:id="@+id/home_action_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            app:avBackgroundDrawable="@drawable/flat_button_background_selector"
-            app:avHeight="56dp"
-            app:avWidth="160dp"
-            app:avMarginHorizontal="6dp"
-            app:avMarginVertical="4dp"
-            app:avTextColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:setList="@{viewModel.actionList}" />
+            app:layout_constraintTop_toBottomOf="@+id/home_feedback_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
