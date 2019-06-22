@@ -23,9 +23,9 @@ class ActionView @JvmOverloads constructor(
 
     private var actionClick: ((Action) -> Unit)? = null
 
-    private var drawableRes: Int = 0
-    private var textColor: Int = 0
-    private var textSize: Float = 0f
+    private var buttonDrawableRes: Int = 0
+    private var buttonTextColor: Int = 0
+    private var buttonTextSize: Float = 0f
     private var buttonWidth: Int = 0
     private var buttonHeight: Int = 0
     private var buttonMarginHorizontal: Int = 0
@@ -90,9 +90,9 @@ class ActionView @JvmOverloads constructor(
         this.buttonHeight = height
         this.buttonMarginHorizontal = marginHorizontal
         this.buttonMarginVertical = marginVertical
-        this.textColor = textColor
-        this.textSize = textSize
-        this.drawableRes = drawableRes
+        this.buttonTextColor = textColor
+        this.buttonTextSize = textSize
+        this.buttonDrawableRes = drawableRes
     }
 
 
@@ -110,7 +110,6 @@ class ActionView @JvmOverloads constructor(
     private fun buildButton(action: Action): Button {
 
         return Button(context).apply {
-            LayoutParams.MATCH_PARENT
             layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
                 takeIf { buttonWidth == LayoutParams.WRAP_CONTENT }
                     ?.run { weight = 1f }
@@ -121,15 +120,15 @@ class ActionView @JvmOverloads constructor(
                     buttonMarginVertical
                 )
             }
-            takeIf { this@ActionView.drawableRes != 0 }
+            takeIf { this@ActionView.buttonDrawableRes != 0 }
                 ?.run {
-                    setBackgroundResource(drawableRes)
+                    setBackgroundResource(buttonDrawableRes)
                 }
-            takeIf { this@ActionView.textColor != 0 }
+            takeIf { this@ActionView.buttonTextColor != 0 }
                 ?.run {
-                    setTextColor(textColor)
+                    setTextColor(buttonTextColor)
                 }
-            takeIf { this@ActionView.textSize != 0f }
+            takeIf { this@ActionView.buttonTextSize != 0f }
                 ?.run {
                     setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
                 }

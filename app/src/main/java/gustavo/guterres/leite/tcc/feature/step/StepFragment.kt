@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.databinding.FragmentStepBinding
+import org.koin.android.viewmodel.ext.android.getViewModel
 
 class StepFragment : Fragment() {
 
@@ -26,7 +27,7 @@ class StepFragment : Fragment() {
             false
         )
 
-        binding.viewModel = StepViewModel()
+        binding.viewModel = getViewModel()
 
         return binding.root
     }
