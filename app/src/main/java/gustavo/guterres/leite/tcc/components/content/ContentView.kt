@@ -11,6 +11,7 @@ import androidx.annotation.Dimension
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.databinding.ComponentContentViewBinding
 import kotlinx.android.synthetic.main.component_content_view.view.*
 import org.koin.standalone.KoinComponent
@@ -76,7 +77,7 @@ class ContentView @JvmOverloads constructor(
         }
     }
 
-    fun setList(items: List<ContentViewItem>) {
+    fun setList(items: List<Spotlight>) {
         listAdapter.list = items
     }
 

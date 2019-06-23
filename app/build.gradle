@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -27,6 +29,7 @@ android {
 
 ext {
     koin_version = '1.0.2'
+    room_version = '2.1.0'
 }
 
 dependencies {
@@ -47,6 +50,15 @@ dependencies {
     //Rx
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
