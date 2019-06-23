@@ -17,7 +17,8 @@ object StepMapper {
                 id.toString(),
                 points,
                 ContentMapper.toContent(content),
-                ActionMapper.toActionList(actions)
+                ActionMapper.toActionList(actions),
+                rightActionId.toString()
             )
         }
     }

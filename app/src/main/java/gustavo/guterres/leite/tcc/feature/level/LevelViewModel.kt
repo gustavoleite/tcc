@@ -1,6 +1,7 @@
 package gustavo.guterres.leite.tcc.feature.level
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.data.entity.output.*
 import gustavo.guterres.leite.tcc.data.repository.LevelRepository
@@ -10,6 +11,8 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class LevelViewModel(private val repository: LevelRepository) : BaseViewModel() {
+
+    val levels = MutableLiveData<List<Level>>()
 
     init {
         fillData()
@@ -49,7 +52,31 @@ class LevelViewModel(private val repository: LevelRepository) : BaseViewModel() 
                             "50,00",
                             null
                         )
-                    )
+                    ),
+                    1
+                ),
+                StepEntity(
+                    2,
+                    45.7,
+                    ContentEntity(
+                        2,
+                        "Identifique o valor da nota",
+                        listOf(
+                            SpotlightEntity(
+                                1,
+                                null,
+                                "CEM_REAIS"
+                            )
+                        )
+                    ),
+                    listOf(
+                        ActionEntity(
+                            1,
+                            "Cem reais",
+                            null
+                        )
+                    ),
+                    1
                 )
             )
         )
@@ -70,6 +97,7 @@ class LevelViewModel(private val repository: LevelRepository) : BaseViewModel() 
     }
 
     private fun onLevelsFetched(levels: List<Level>) {
+        this.levels.value = levels
         Log.d("Dados encontrados:", levels.toString())
     }
 

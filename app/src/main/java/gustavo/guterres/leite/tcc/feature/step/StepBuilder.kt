@@ -1,11 +1,12 @@
 package gustavo.guterres.leite.tcc.feature.step
 
+import gustavo.guterres.leite.tcc.data.entity.model.Action
 import gustavo.guterres.leite.tcc.data.entity.model.Step
 
 class StepBuilder {
 
 
-    fun getFragmentList(steps: List<Step>, onStepFinished: () -> Unit): List<StepFragment> {
+    fun getFragmentList(steps: List<Step>, onStepFinished: (Action) -> Unit): List<StepFragment> {
 
         val fragments = mutableListOf<StepFragment>()
 

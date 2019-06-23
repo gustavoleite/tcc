@@ -13,5 +13,7 @@ data class StepEntity(
 
     var content: ContentEntity,
 
-    var actions: List<ActionEntity>
+    var actions: List<ActionEntity>,
+
+    var rightActionId: Int
 )

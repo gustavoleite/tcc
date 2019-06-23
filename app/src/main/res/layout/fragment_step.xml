@@ -19,13 +19,13 @@
             android:id="@+id/step_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cvText="Ola mundo :)"
+            app:cvText="@{viewModel.question}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:setList="@{viewModel.contentList}"
+            app:setList="@{viewModel.spotlightList}"
             tools:layout_height="200dp" />
 
         <gustavo.guterres.leite.tcc.components.action.ActionView

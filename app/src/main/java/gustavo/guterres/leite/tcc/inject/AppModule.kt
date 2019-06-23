@@ -2,6 +2,7 @@ package gustavo.guterres.leite.tcc.inject
 
 import androidx.room.Room
 import gustavo.guterres.leite.tcc.components.content.ContentViewItemAdapter
+import gustavo.guterres.leite.tcc.data.entity.model.Step
 import gustavo.guterres.leite.tcc.data.repository.LevelRepository
 import gustavo.guterres.leite.tcc.data.repository.LevelRepositoryImpl
 import gustavo.guterres.leite.tcc.data.room.TCCDatabase
@@ -19,7 +20,7 @@ val resourceProviderModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { StepViewModel(get()) }
+    viewModel { StepViewModel() }
     viewModel { LevelViewModel(get()) }
 }
 
