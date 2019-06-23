@@ -5,10 +5,11 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
+import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
 
-class ContentViewItemViewModel(item: ContentViewItem, resourceProvider: ResourceProvider) : ViewModel() {
+class ContentViewItemViewModel(item: Spotlight, resourceProvider: ResourceProvider) : ViewModel() {
 
     val image = ObservableField<Drawable>()
     val label = ObservableField<String>()
@@ -17,7 +18,7 @@ class ContentViewItemViewModel(item: ContentViewItem, resourceProvider: Resource
     init {
         image.set(resourceProvider.getDrawable(item.image))
         item.value?.let {
-            label.set(it.toDouble().toBrCurrency())
+            label.set(it.toBrCurrency())
             iconVisilibity.set(View.VISIBLE)
         }
     }

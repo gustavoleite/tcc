@@ -12,6 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.data.entity.model.Action
 import kotlinx.android.synthetic.main.component_action_view.view.*
 import org.koin.standalone.KoinComponent
 
