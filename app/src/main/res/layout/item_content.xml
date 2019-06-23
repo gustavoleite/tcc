@@ -23,7 +23,7 @@
             android:src="@{viewModel.image}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_hundred_reais" />
+            tools:src="@drawable/ic_note_hundred" />
 
         <ImageView
             android:id="@+id/cc_item_icon"

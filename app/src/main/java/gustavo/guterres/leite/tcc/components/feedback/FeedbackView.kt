@@ -8,8 +8,14 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.components.setProgressValueWithAnimation
 import kotlinx.android.synthetic.main.component_feedback_view.view.*
+import kotlinx.android.synthetic.main.component_progress_view.view.*
 
 class FeedbackView @JvmOverloads constructor(
     context: Context,
@@ -17,15 +23,20 @@ class FeedbackView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
+    private lateinit var binding : gustavo.guterres.leite.tcc.databinding.ComponentFeedbackViewBinding
+
     init {
         inflateLayout(context)
         loadAtrributes(attrs, context)
     }
 
     private fun inflateLayout(context: Context) {
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.component_feedback_view, this, true)
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.component_feedback_view,
+            this,
+            true
+        )
 
         orientation = VERTICAL
     }
@@ -48,33 +59,33 @@ class FeedbackView @JvmOverloads constructor(
     }
 
     private fun TypedArray.loadStartButtonData() {
-        setStartButtonData(getDrawable(R.styleable.FeedbackView_startButtonDrawable))
+        setStartButtonData(getDrawable(R.styleable.FeedbackView_fvStartButtonDrawable))
         //@TODO setar onclick
     }
 
     private fun TypedArray.loadEndButtonData() {
         setEndButtonData(
-            getDrawable(R.styleable.FeedbackView_endButtonDrawable),
-            getString(R.styleable.FeedbackView_endButtonText),
-            getColor(R.styleable.FeedbackView_endButtonTextColor, 0),
-            getDimension(R.styleable.FeedbackView_endButtonTextSize, 0f)
+            getDrawable(R.styleable.FeedbackView_fvEndButtonDrawable),
+            getString(R.styleable.FeedbackView_fvEndButtonText),
+            getColor(R.styleable.FeedbackView_fvEndButtonTextColor, 0),
+            getDimension(R.styleable.FeedbackView_fvEndButtonTextSize, 0f)
         )
         //@TODO setar onclick
     }
 
     private fun TypedArray.loadProgressViewData() {
 
-        cf_progress_view.setLabelData(
-            getString(R.styleable.FeedbackView_pvText),
-            getColor(R.styleable.FeedbackView_pvTextColor, 0),
-            getDimension(R.styleable.FeedbackView_pvTextSize, 0f)
+        cf_progress_view.setTextInfoData(
+            getString(R.styleable.FeedbackView_fvText),
+            getColor(R.styleable.FeedbackView_fvTextColor, 0),
+            getDimension(R.styleable.FeedbackView_fvTextSize, 0f)
         )
 
         cf_progress_view.setProgressBarData(
-            getDrawable(R.styleable.FeedbackView_pvBackgroundDrawable),
-            getInt((R.styleable.FeedbackView_pvMinValue), 0),
-            getInt((R.styleable.FeedbackView_pvMaxValue), 100),
-            getInt((R.styleable.FeedbackView_pvCurrentProgress), 0)
+            getDrawable(R.styleable.FeedbackView_fvBackgroundDrawable),
+            getInt((R.styleable.FeedbackView_fvMinValue), 0),
+            getInt((R.styleable.FeedbackView_fvMaxValue), 100),
+            getInt((R.styleable.FeedbackView_fvCurrentProgress), 0)
         )
     }
 
@@ -96,6 +107,27 @@ class FeedbackView @JvmOverloads constructor(
                 ?.run {
                     setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
                 }
+        }
+    }
+
+    companion object {
+
+        @JvmStatic
+        @BindingAdapter("fvCurrentProgress")
+        fun setFvCurrentProgress(view: FeedbackView, value: ObservableInt) {
+            view.binding.cfProgressView.pv_progress_bar.setProgressValueWithAnimation(value.get())
+        }
+
+        @JvmStatic
+        @BindingAdapter("fvMaxValue")
+        fun setFvMaxValue(view: FeedbackView, value: ObservableInt) {
+            view.binding.cfProgressView.setMaxValue(value.get())
+        }
+
+        @JvmStatic
+        @BindingAdapter("fvText")
+        fun setFvText(view: FeedbackView, value: ObservableField<String>) {
+            view.binding.cfProgressView.pv_text_info.text = value.get()
         }
     }
 }

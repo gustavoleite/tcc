@@ -23,12 +23,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:pvBackgroundDrawable="@drawable/load_progress"
-            app:pvCurrentProgress="80"
-            app:pvText="7/10"
-            app:pvTextColor="@color/primaryColor"
-            app:pvTextSize="14sp"
-            app:startButtonDrawable="@drawable/ic_round_cancel" />
+            app:fvBackgroundDrawable="@drawable/load_progress"
+            app:fvCurrentProgress="@{viewModel.currentStep}"
+            app:fvMaxValue="@{viewModel.totalStep}"
+            app:fvText="@{viewModel.progressInfo}"
+            app:fvTextColor="@color/primaryTextColor"
+            app:fvTextSize="12sp"
+            app:fvStartButtonDrawable="@drawable/ic_round_cancel" />
 
         <FrameLayout
             android:id="@+id/level_container_view"

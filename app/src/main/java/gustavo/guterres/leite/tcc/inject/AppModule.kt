@@ -21,7 +21,7 @@ val resourceProviderModule = module {
 
 val viewModelModule = module {
     viewModel { StepViewModel() }
-    viewModel { LevelViewModel(get()) }
+    viewModel { LevelViewModel(get(), get()) }
 }
 
 val factoryModule = module {

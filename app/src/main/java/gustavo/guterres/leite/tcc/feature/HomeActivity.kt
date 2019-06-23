@@ -17,20 +17,6 @@ class HomeActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<gustavo.guterres.leite.tcc.databinding.ActivityHomeBinding>(this, R.layout.activity_home)
         binding.viewModel = HomeViewModel()
 
-
-        // Create new fragment and transaction
-        val newFragment = StepFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack
-        transaction.replace(R.id.home_container_view, newFragment)
-        transaction.addToBackStack(null)
-
-// Commit the transaction
-        transaction.commit()
-
-
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("ActionOutput", null).show()
     }

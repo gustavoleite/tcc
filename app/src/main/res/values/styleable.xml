@@ -11,18 +11,18 @@
     </declare-styleable>
 
     <declare-styleable name="FeedbackView">
-        <attr name="pvText" format="string" />
-        <attr name="pvTextSize" format="dimension" />
-        <attr name="pvTextColor" format="color" />
-        <attr name="pvBackgroundDrawable" format="integer" />
-        <attr name="pvMinValue" format="integer" />
-        <attr name="pvMaxValue" format="integer" />
-        <attr name="pvCurrentProgress" format="integer" />
-        <attr name="startButtonDrawable" format="integer" />
-        <attr name="endButtonDrawable" format="integer" />
-        <attr name="endButtonText" format="string" />
-        <attr name="endButtonTextSize" format="dimension" />
-        <attr name="endButtonTextColor" format="color" />
+        <attr name="fvText" format="string" />
+        <attr name="fvTextSize" format="dimension" />
+        <attr name="fvTextColor" format="color" />
+        <attr name="fvBackgroundDrawable" format="integer" />
+        <attr name="fvMinValue" format="integer" />
+        <attr name="fvMaxValue" format="integer" />
+        <attr name="fvCurrentProgress" format="integer" />
+        <attr name="fvStartButtonDrawable" format="integer" />
+        <attr name="fvEndButtonDrawable" format="integer" />
+        <attr name="fvEndButtonText" format="string" />
+        <attr name="fvEndButtonTextSize" format="dimension" />
+        <attr name="fvEndButtonTextColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ContentView">
