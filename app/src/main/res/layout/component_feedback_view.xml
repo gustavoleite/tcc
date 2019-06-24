@@ -9,19 +9,19 @@
         tools:layout_height="64dp">
 
         <ImageView
-            android:id="@+id/cf_start_image_view"
+            android:id="@+id/fv_start_image_view"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cf_progress_view"
+            app:layout_constraintEnd_toStartOf="@+id/fv_progress_view"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_round_cancel" />
 
         <gustavo.guterres.leite.tcc.components.progress.ProgressView
-            android:id="@+id/cf_progress_view"
+            android:id="@+id/fv_progress_view"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
@@ -29,10 +29,10 @@
             app:backgroundDrawable="@drawable/load_progress"
             app:currentProgress="60"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cf_end_button"
+            app:layout_constraintEnd_toStartOf="@+id/fv_end_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/cf_start_image_view"
+            app:layout_constraintStart_toEndOf="@+id/fv_start_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="512dp"
             app:text="5/10"
@@ -40,7 +40,7 @@
             app:textSize="18sp" />
 
         <TextView
-            android:id="@+id/cf_end_button"
+            android:id="@+id/fv_end_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -53,7 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/cf_progress_view"
+            app:layout_constraintStart_toEndOf="@+id/fv_progress_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:drawableStart="@drawable/ic_monetization"
             tools:text="R$ 124,15" />

@@ -3,6 +3,7 @@ package gustavo.guterres.leite.tcc.feature.level
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,7 +13,6 @@ import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelBinding
 import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
-import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LevelActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         setupBinding()
-        setupObserver()
+        setupObservers()
         //  replaceFragment(StepFragment())
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("ActionOutput", null).show()
@@ -36,17 +36,24 @@ class LevelActivity : AppCompatActivity() {
             .setContentView(this, R.layout.activity_level)
 
         binding.viewModel = viewModel
+
+        Button(this)
     }
 
-    private fun setupObserver() {
-        binding.viewModel?.levels?.observe(this, Observer { levels ->
-            levels?.let {
-                stepsFragment = StepBuilder().getFragmentList(it.first().steps) {
-                    navigateToNextStep()
+    private fun setupObservers() {
+        with(viewModel) {
+            levels.observe(this@LevelActivity, Observer { levels ->
+                levels?.let {
+                    stepsFragment = StepBuilder().getFragmentList(it.first().steps) {
+                        navigateToNextStep()
+                    }
+                    replaceFragment(stepsFragment.first())
                 }
-                replaceFragment(stepsFragment.first())
-            }
-        })
+            })
+            close.observe(this@LevelActivity, Observer {
+                finish()
+            })
+        }
     }
 
     private fun navigateToNextStep() {

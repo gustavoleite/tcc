@@ -25,6 +25,7 @@ class LevelViewModel(
     val currentStep = ObservableInt()
     val totalStep = ObservableInt()
     val progressInfo = ObservableField<String>()
+    val close = MutableLiveData<Unit>()
 
     init {
         fillData()
@@ -40,6 +41,10 @@ class LevelViewModel(
                 )
             }
         })
+    }
+
+    fun onCloseClick() {
+        close.value = Unit
     }
 
     fun fillData() {
@@ -66,18 +71,38 @@ class LevelViewModel(
                             SpotlightEntity(
                                 1,
                                 null,
-                                "CEM_REAIS"
+                                "CINQUENTA_REAIS"
+                            ),
+                            SpotlightEntity(
+                                2,
+                                null,
+                                "CINCO_REAIS"
+                            ),
+                            SpotlightEntity(
+                                3,
+                                null,
+                                "DOIS_REAIS"
                             )
                         )
                     ),
                     listOf(
                         ActionEntity(
                             1,
-                            "50,00",
+                            "R$ 55,00",
+                            null
+                        ),
+                        ActionEntity(
+                            2,
+                            "R$ 52,00",
+                            null
+                        ),
+                        ActionEntity(
+                            2,
+                            "R$ 57,00",
                             null
                         )
                     ),
-                    1
+                    3
                 ),
                 StepEntity(
                     2,
@@ -96,11 +121,21 @@ class LevelViewModel(
                     listOf(
                         ActionEntity(
                             1,
-                            "Cem reais",
+                            "Cinquenta\nreais",
+                            null
+                        ),
+                        ActionEntity(
+                            2,
+                            "Cem\nreais",
+                            null
+                        ),
+                        ActionEntity(
+                            3,
+                            "Vinte\nreais",
                             null
                         )
                     ),
-                    1
+                    2
                 )
             )
         )

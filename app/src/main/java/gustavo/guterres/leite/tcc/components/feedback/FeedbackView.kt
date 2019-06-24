@@ -60,7 +60,6 @@ class FeedbackView @JvmOverloads constructor(
 
     private fun TypedArray.loadStartButtonData() {
         setStartButtonData(getDrawable(R.styleable.FeedbackView_fvStartButtonDrawable))
-        //@TODO setar onclick
     }
 
     private fun TypedArray.loadEndButtonData() {
@@ -70,18 +69,17 @@ class FeedbackView @JvmOverloads constructor(
             getColor(R.styleable.FeedbackView_fvEndButtonTextColor, 0),
             getDimension(R.styleable.FeedbackView_fvEndButtonTextSize, 0f)
         )
-        //@TODO setar onclick
     }
 
     private fun TypedArray.loadProgressViewData() {
 
-        cf_progress_view.setTextInfoData(
+        binding.fvProgressView.setTextInfoData(
             getString(R.styleable.FeedbackView_fvText),
             getColor(R.styleable.FeedbackView_fvTextColor, 0),
             getDimension(R.styleable.FeedbackView_fvTextSize, 0f)
         )
 
-        cf_progress_view.setProgressBarData(
+        binding.fvProgressView.setProgressBarData(
             getDrawable(R.styleable.FeedbackView_fvBackgroundDrawable),
             getInt((R.styleable.FeedbackView_fvMinValue), 0),
             getInt((R.styleable.FeedbackView_fvMaxValue), 100),
@@ -90,13 +88,13 @@ class FeedbackView @JvmOverloads constructor(
     }
 
     fun setStartButtonData(drawable: Drawable?) {
-        cf_start_image_view.apply {
+        fv_start_image_view.apply {
             background = drawable
         }
     }
 
     fun setEndButtonData(drawableStart: Drawable?, textLabel: String?, @ColorInt textColor: Int, textSize: Float) {
-        cf_end_button.apply {
+        fv_end_button.apply {
             setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, null, null)
             text = textLabel
             takeIf { textColor != 0 }
@@ -115,19 +113,25 @@ class FeedbackView @JvmOverloads constructor(
         @JvmStatic
         @BindingAdapter("fvCurrentProgress")
         fun setFvCurrentProgress(view: FeedbackView, value: ObservableInt) {
-            view.binding.cfProgressView.pv_progress_bar.setProgressValueWithAnimation(value.get())
+            view.binding.fvProgressView.pv_progress_bar.setProgressValueWithAnimation(value.get())
         }
 
         @JvmStatic
         @BindingAdapter("fvMaxValue")
         fun setFvMaxValue(view: FeedbackView, value: ObservableInt) {
-            view.binding.cfProgressView.setMaxValue(value.get())
+            view.binding.fvProgressView.setMaxValue(value.get())
         }
 
         @JvmStatic
         @BindingAdapter("fvText")
         fun setFvText(view: FeedbackView, value: ObservableField<String>) {
-            view.binding.cfProgressView.pv_text_info.text = value.get()
+            view.binding.fvProgressView.pv_text_info.text = value.get()
+        }
+
+        @JvmStatic
+        @BindingAdapter("fvStartButtonOnClick")
+        fun setFvStartButtonOnClick(view: FeedbackView, onClickListener: OnClickListener) {
+            view.binding.fvStartImageView.setOnClickListener(onClickListener)
         }
     }
 }

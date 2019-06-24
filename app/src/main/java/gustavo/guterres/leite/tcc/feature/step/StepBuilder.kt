@@ -6,7 +6,7 @@ import gustavo.guterres.leite.tcc.data.entity.model.Step
 class StepBuilder {
 
 
-    fun getFragmentList(steps: List<Step>, onStepFinished: (Action) -> Unit): List<StepFragment> {
+    fun getFragmentList(steps: List<Step>, onStepFinished: () -> Unit): List<StepFragment> {
 
         val fragments = mutableListOf<StepFragment>()
 

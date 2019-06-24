@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Action
 import gustavo.guterres.leite.tcc.data.entity.model.Step
@@ -24,6 +26,7 @@ class StepFragment : Fragment() {
 
         setupBinding(inflater, container)
         setupViewModel()
+        setupObserver()
 
         return binding.root
     }
@@ -37,22 +40,35 @@ class StepFragment : Fragment() {
         )
 
         binding.viewModel = getViewModel()
-        binding.stepActionView.setAvOnClick(onStepFinishedCallback)
+        binding.stepActionView.setAvOnClick {
+            binding.viewModel?.onActionSelected(it)
+        }
     }
 
     private fun setupViewModel() {
-        binding.viewModel?.setup(
-            arguments?.getParcelable(STEP_EXTRA_ARG)
-                ?: throw Exception("Argument step not found")
-        )
+        binding.viewModel?.setup(getStep())
+    }
+
+    private fun setupObserver() {
+        binding.viewModel?.isRightAnswer?.observe(this, Observer { isRightAnswer ->
+            takeIf { isRightAnswer }
+                ?.run { Toast.makeText(this@StepFragment.context, "Resposta correta!", Toast.LENGTH_SHORT).show() }
+                ?: run { Toast.makeText(this@StepFragment.context, "Resposta errada!", Toast.LENGTH_SHORT).show() }
+            onStepFinishedCallback?.invoke()
+        })
+    }
+
+    private fun getStep(): Step {
+        return arguments?.getParcelable(STEP_EXTRA_ARG)
+            ?: throw Exception("Argument step not found")
     }
 
     companion object {
 
         private const val STEP_EXTRA_ARG = "STEP_EXTRA_ARG"
-        private var onStepFinishedCallback: ((Action) -> Unit)? = null
+        private var onStepFinishedCallback: (() -> Unit)? = null
 
-        fun newInstance(step: Step, onStepFinished: (Action) -> Unit): StepFragment {
+        fun newInstance(step: Step, onStepFinished: () -> Unit): StepFragment {
 
             onStepFinishedCallback = onStepFinished
 

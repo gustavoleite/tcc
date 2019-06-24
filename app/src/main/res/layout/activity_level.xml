@@ -20,16 +20,17 @@
             android:id="@+id/level_feedback_view"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:fvBackgroundDrawable="@drawable/load_progress"
             app:fvCurrentProgress="@{viewModel.currentStep}"
             app:fvMaxValue="@{viewModel.totalStep}"
+            app:fvStartButtonDrawable="@drawable/ic_round_cancel"
+            app:fvStartButtonOnClick="@{() -> viewModel.onCloseClick()}"
             app:fvText="@{viewModel.progressInfo}"
             app:fvTextColor="@color/primaryTextColor"
             app:fvTextSize="12sp"
-            app:fvStartButtonDrawable="@drawable/ic_round_cancel" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/level_container_view"
