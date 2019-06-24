@@ -10,7 +10,5 @@ MVVM com Architecture Components
 <b>Tecnologias utilizadas:</b><br>
 Databinding<br>
 RxKotlin<br>
-Lottie<br>
-Firebase<br>
+Room<br>
 Koin<br>
-MockK<br>
