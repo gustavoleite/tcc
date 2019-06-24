@@ -7,7 +7,7 @@
     tools:layout_height="28dp">
 
     <ProgressBar
-        android:id="@+id/cp_progress_bar"
+        android:id="@+id/pv_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,16 +19,18 @@
         tools:progressDrawable="@drawable/load_progress" />
 
     <TextView
-        android:id="@+id/cp_start_label"
+        android:id="@+id/pv_text_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/primaryTextColor"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cp_progress_bar"
-        app:layout_constraintStart_toStartOf="@+id/cp_progress_bar"
-        app:layout_constraintTop_toTopOf="@+id/cp_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@+id/pv_progress_bar"
+        app:layout_constraintStart_toStartOf="@+id/pv_progress_bar"
+        app:layout_constraintTop_toTopOf="@+id/pv_progress_bar"
+        app:layout_constraintVertical_bias="0.41000003"
         tools:text="5/10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

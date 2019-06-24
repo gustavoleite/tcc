@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Nosso Dinheiro</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Níveis - Nosso dinheiro</string>
+    <string name="title_activity_level">Jogar - Nosso dinheiro</string>
+
+    <string name="level_progress_bar_info">%d/%d</string>
 </resources>

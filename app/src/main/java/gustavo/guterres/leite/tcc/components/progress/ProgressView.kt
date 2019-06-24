@@ -40,7 +40,7 @@ class ProgressView @JvmOverloads constructor(
                     R.styleable.ProgressView, 0, 0
                 )
             ) {
-                loadLabelData()
+                loadTextInfoData()
                 loadProgressBarData()
 
                 recycle()
@@ -57,8 +57,8 @@ class ProgressView @JvmOverloads constructor(
         )
     }
 
-    private fun TypedArray.loadLabelData() {
-        setLabelData(
+    private fun TypedArray.loadTextInfoData() {
+        setTextInfoData(
             getString(R.styleable.ProgressView_text),
             getColor(R.styleable.ProgressView_textColor, 0),
             getDimension(R.styleable.ProgressView_textSize, 0f)
@@ -67,7 +67,7 @@ class ProgressView @JvmOverloads constructor(
 
     fun setProgressBarData(background: Drawable?, minValue: Int, maxValue: Int, currentValue: Int) {
 
-        cp_progress_bar.apply {
+        pv_progress_bar.apply {
             progressDrawable = background
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 min = minValue
@@ -77,8 +77,8 @@ class ProgressView @JvmOverloads constructor(
         }
     }
 
-    fun setLabelData(textLabel: String?, @ColorInt textColor: Int, textSize: Float) {
-        cp_start_label.apply {
+    fun setTextInfoData(textLabel: String?, @ColorInt textColor: Int, textSize: Float) {
+        pv_text_info.apply {
             text = textLabel
             takeIf { textColor != 0 }
                 ?.run {
@@ -92,6 +92,6 @@ class ProgressView @JvmOverloads constructor(
     }
 
     fun setMaxValue(value: Int) {
-        cp_progress_bar.max = value * 100
+        pv_progress_bar.max = value * 100
     }
 }

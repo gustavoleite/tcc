@@ -135,6 +135,7 @@ class ActionView @JvmOverloads constructor(
                 }
             text = action.text
             setOnClickListener { actionClick?.invoke(action) }
+            isAllCaps = false
         }
     }
 
