@@ -36,8 +36,6 @@ class LevelActivity : AppCompatActivity() {
             .setContentView(this, R.layout.activity_level)
 
         binding.viewModel = viewModel
-
-        Button(this)
     }
 
     private fun setupObservers() {

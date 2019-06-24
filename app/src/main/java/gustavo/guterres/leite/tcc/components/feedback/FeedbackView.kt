@@ -14,7 +14,7 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.components.setProgressValueWithAnimation
-import kotlinx.android.synthetic.main.component_feedback_view.view.*
+import gustavo.guterres.leite.tcc.databinding.ComponentFeedbackViewBinding
 import kotlinx.android.synthetic.main.component_progress_view.view.*
 
 class FeedbackView @JvmOverloads constructor(
@@ -23,7 +23,7 @@ class FeedbackView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var binding : gustavo.guterres.leite.tcc.databinding.ComponentFeedbackViewBinding
+    private lateinit var binding: ComponentFeedbackViewBinding
 
     init {
         inflateLayout(context)
@@ -88,13 +88,13 @@ class FeedbackView @JvmOverloads constructor(
     }
 
     fun setStartButtonData(drawable: Drawable?) {
-        fv_start_image_view.apply {
+        binding.fvStartImageView.apply {
             background = drawable
         }
     }
 
     fun setEndButtonData(drawableStart: Drawable?, textLabel: String?, @ColorInt textColor: Int, textSize: Float) {
-        fv_end_button.apply {
+        binding.fvEndButton.apply {
             setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, null, null)
             text = textLabel
             takeIf { textColor != 0 }

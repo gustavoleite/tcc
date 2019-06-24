@@ -21,26 +21,16 @@ class LevelViewModel(
 ) : BaseViewModel() {
 
     val levels = MutableLiveData<List<Level>>()
+    val close = MutableLiveData<Unit>()
 
     val currentStep = ObservableInt()
     val totalStep = ObservableInt()
     val progressInfo = ObservableField<String>()
-    val close = MutableLiveData<Unit>()
 
     init {
         fillData()
 
-        currentStep.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                progressInfo.set(
-                    resourceProvider.getString(
-                        R.string.level_progress_bar_info,
-                        currentStep.get(),
-                        totalStep.get()
-                    )
-                )
-            }
-        })
+        currentStep.addOnPropertyChangedCallback(onCurrentStepChange())
     }
 
     fun onCloseClick() {
@@ -54,6 +44,47 @@ class LevelViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::onFillDataSuccess, this::onError)
             .addTo(compositeDisposable)
+    }
+
+    private fun onFillDataSuccess() {
+        Log.d("Dados inseridos", "Com sucesso!")
+        fetchData()
+    }
+
+    fun fetchData() {
+        repository
+            .getLevels("1")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::onLevelsFetched, this::onError)
+            .addTo(compositeDisposable)
+    }
+
+    private fun onLevelsFetched(levels: List<Level>) {
+        this.levels.value = levels
+        this.totalStep.set(levels.first().steps.size)
+        this.currentStep.set(1)
+        Log.d("Dados encontrados:", levels.toString())
+    }
+
+    private fun onError(throwable: Throwable) {
+        Log.d("Errrooooouuuu!", throwable.message)
+    }
+
+    private fun onCurrentStepChange(): Observable.OnPropertyChangedCallback {
+        return object : Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                progressInfo.set(updatedProgressInfo())
+            }
+        }
+    }
+
+    private fun updatedProgressInfo() : String {
+        return resourceProvider.getString(
+            R.string.level_progress_bar_info,
+            currentStep.get(),
+            totalStep.get()
+        )
     }
 
     fun getDataMock(): LevelEntity {
@@ -139,30 +170,5 @@ class LevelViewModel(
                 )
             )
         )
-    }
-
-    private fun onFillDataSuccess() {
-        Log.d("Dados inseridos", "Com sucesso!")
-        fetchData()
-    }
-
-    fun fetchData() {
-        repository
-            .getLevels("1")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::onLevelsFetched, this::onError)
-            .addTo(compositeDisposable)
-    }
-
-    private fun onLevelsFetched(levels: List<Level>) {
-        this.levels.value = levels
-        this.totalStep.set(levels.first().steps.size)
-        this.currentStep.set(1)
-        Log.d("Dados encontrados:", levels.toString())
-    }
-
-    private fun onError(throwable: Throwable) {
-        Log.d("Errrooooouuuu!", throwable.message)
     }
 }

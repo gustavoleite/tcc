@@ -27,6 +27,8 @@ class StepViewModel : BaseViewModel() {
     }
 
     fun onActionSelected(action: Action) {
-        isRightAnswer.value = (action.id == expectedActionId)
+        isRightAnswer.value = isExpected(action)
     }
+
+    private fun isExpected(action: Action) = (action.id == expectedActionId)
 }
