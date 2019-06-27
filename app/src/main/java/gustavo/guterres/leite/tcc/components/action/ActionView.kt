@@ -5,8 +5,11 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
@@ -101,10 +104,38 @@ class ActionView @JvmOverloads constructor(
 
         list.forEachIndexed { index, action ->
             if (index < FIRST_LINE_VIEW_LIMIT) {
-                av_first_line?.addView(buildButton(action))
+                av_first_line?.addView(handleButtonType(action))
             } else if (index < SECOUND_LINE_VIEW_LIMIT) {
-                av_second_line?.addView(buildButton(action))
+                av_second_line?.addView(handleButtonType(action))
             }
+        }
+    }
+
+    private fun handleButtonType(action: Action): View {
+
+        return action.image?.let {
+            buildImageButton(action)
+        } ?: buildButton(action)
+    }
+
+    private fun buildImageButton(action: Action): ImageButton {
+
+        return ImageButton(context).apply {
+            layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
+                takeIf { buttonWidth == LayoutParams.WRAP_CONTENT }
+                    ?.run { weight = 1f }
+                setMargins(
+                    buttonMarginHorizontal,
+                    buttonMarginVertical,
+                    buttonMarginHorizontal,
+                    buttonMarginVertical
+                )
+            }
+
+            setBackgroundResource(R.drawable.clean_button_background_selector)
+            setImageResource(action.image!!)
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            setOnClickListener { actionClick?.invoke(action) }
         }
     }
 

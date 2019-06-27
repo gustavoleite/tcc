@@ -79,7 +79,7 @@ class LevelViewModel(
         }
     }
 
-    private fun updatedProgressInfo() : String {
+    private fun updatedProgressInfo(): String {
         return resourceProvider.getString(
             R.string.level_progress_bar_info,
             currentStep.get(),
@@ -164,6 +164,38 @@ class LevelViewModel(
                             3,
                             "Vinte\nreais",
                             null
+                        )
+                    ),
+                    2
+                ),
+                StepEntity(
+                    3,
+                    45.7,
+                    ContentEntity(
+                        2,
+                        "Selecione as notas necessárias\npara comprar este caderno:",
+                        listOf(
+                            SpotlightEntity(
+                                1,
+                                10.00,
+                                "CADERNO"
+                            )
+                        )
+                    ),
+                    listOf(
+                        ActionEntity(
+                            1,
+                            image = "CINQUENTA_REAIS"
+                        ),
+                        ActionEntity(
+                            2,
+                            "Cem\nreais",
+                            image = "DEZ_REAIS"
+                        ),
+                        ActionEntity(
+                            3,
+                            "Vinte\nreais",
+                            image = "VINTE_REAIS"
                         )
                     ),
                     2

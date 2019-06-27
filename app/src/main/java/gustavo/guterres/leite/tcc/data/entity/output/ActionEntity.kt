@@ -9,7 +9,7 @@ data class ActionEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
 
-    var text: String?,
+    var text: String? = null,
 
-    var image: String?
+    var image: String? = null
 )
