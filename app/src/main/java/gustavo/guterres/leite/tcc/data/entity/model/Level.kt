@@ -6,5 +6,7 @@ data class Level(
 
     val name: String,
 
-    val steps: List<Step>
+    val number: String? = null,
+
+    val steps: List<Step>? = null
 )

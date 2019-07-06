@@ -38,7 +38,7 @@ class LevelActivity : AppCompatActivity() {
         with(viewModel) {
             levels.observe(this@LevelActivity, Observer { levels ->
                 levels?.let {
-                    stepsFragment = StepBuilder().getFragmentList(it.first().steps) {
+                    stepsFragment = StepBuilder().getFragmentList(it.first().steps!!) {
                         navigateToNextStep()
                     }
                     replaceFragment(stepsFragment.first())

@@ -7,14 +7,50 @@
 
         <variable
             name="viewModel"
-            type="gustavo.guterres.leite.tcc.feature.HomeViewModel" />
+            type="gustavo.guterres.leite.tcc.feature.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/pattern_background"
-        tools:context=".feature.HomeActivity">
+        android:background="@color/primaryColor"
+        tools:context=".feature.home.HomeActivity">
+
+        <ImageView
+            android:id="@+id/home_money_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_money"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/home_recycler_view"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_app_name"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_money_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

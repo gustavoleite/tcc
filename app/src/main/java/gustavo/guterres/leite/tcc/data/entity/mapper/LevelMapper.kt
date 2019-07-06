@@ -16,6 +16,7 @@ object LevelMapper {
             Level(
                 id.toString(),
                 name,
+                null,
                 StepMapper.toStepList(steps)
             )
         }

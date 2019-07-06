@@ -4,4 +4,6 @@
     <string name="title_activity_level">Jogar - Nosso dinheiro</string>
 
     <string name="level_progress_bar_info">%d/%d</string>
+
+    <string name="home_app_name">Nosso\nDinheiro</string>
 </resources>

@@ -62,7 +62,7 @@ class LevelViewModel(
 
     private fun onLevelsFetched(levels: List<Level>) {
         this.levels.value = levels
-        this.totalStep.set(levels.first().steps.size)
+        this.totalStep.set(levels.first().steps?.size ?: 0)
         this.currentStep.set(1)
         Log.d("Dados encontrados:", levels.toString())
     }

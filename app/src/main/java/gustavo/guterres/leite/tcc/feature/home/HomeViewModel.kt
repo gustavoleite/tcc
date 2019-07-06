@@ -1,4 +1,4 @@
-package gustavo.guterres.leite.tcc.feature
+package gustavo.guterres.leite.tcc.feature.home
 
 import androidx.lifecycle.ViewModel
 import gustavo.guterres.leite.tcc.R
