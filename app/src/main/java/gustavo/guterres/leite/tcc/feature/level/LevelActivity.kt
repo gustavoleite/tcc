@@ -3,7 +3,6 @@ package gustavo.guterres.leite.tcc.feature.level
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -26,9 +25,6 @@ class LevelActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         setupBinding()
         setupObservers()
-        //  replaceFragment(StepFragment())
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("ActionOutput", null).show()
     }
 
     private fun setupBinding() {
@@ -57,7 +53,8 @@ class LevelActivity : AppCompatActivity() {
     private fun navigateToNextStep() {
         with(viewModel) {
             currentStep.set(currentStep.get().inc())
-            replaceFragment(stepsFragment[currentStep.get() - 1])
+            if (stepsFragment.size >= currentStep.get())
+                replaceFragment(stepsFragment[currentStep.get() - 1])
         }
     }
 
