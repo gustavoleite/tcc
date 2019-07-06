@@ -10,6 +10,7 @@ import gustavo.guterres.leite.tcc.data.room.TCCDatabase
 import gustavo.guterres.leite.tcc.feature.home.HomeViewModel
 import gustavo.guterres.leite.tcc.feature.home.LevelItemAdapter
 import gustavo.guterres.leite.tcc.feature.level.LevelViewModel
+import gustavo.guterres.leite.tcc.feature.origination.OriginationViewModel
 import gustavo.guterres.leite.tcc.feature.step.StepViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProviderImpl
@@ -26,6 +27,7 @@ val viewModelModule = module {
     viewModel { StepViewModel() }
     viewModel { LevelViewModel(get(), get()) }
     viewModel { HomeViewModel() }
+    viewModel { OriginationViewModel() }
 }
 
 val factoryModule = module {
