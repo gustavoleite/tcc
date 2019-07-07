@@ -2,6 +2,7 @@ package gustavo.guterres.leite.tcc.inject
 
 import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import gustavo.guterres.leite.tcc.components.action.ActionViewItemAdapter
 import gustavo.guterres.leite.tcc.components.content.ContentViewItemAdapter
 import gustavo.guterres.leite.tcc.data.repository.*
@@ -26,7 +27,7 @@ val resourceProviderModule = module {
 val viewModelModule = module {
     viewModel { StepViewModel() }
     viewModel { LevelViewModel(get(), get()) }
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { OriginationViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
 }
@@ -64,10 +65,18 @@ val firebaseModule = module {
     }
 
     factory {
-        OriginationRepositoryImpl(get()) as OriginationRepository
+        FirebaseDatabase.getInstance()
     }
+
+    factory {
+        OriginationRepositoryImpl(get())
+    } bind OriginationRepository::class
 
     factory {
         LoginRepositoryImpl(get())
     } bind LoginRepository::class
+
+    factory {
+        HomeRepositoryImpl(get())
+    } bind HomeRepository::class
 }

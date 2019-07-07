@@ -8,7 +8,7 @@ import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.databinding.ItemLevelBinding
 
-class LevelItemAdapter() : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
+class LevelItemAdapter : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
 
     var list: List<Level> = emptyList()
         set(value) {
@@ -16,7 +16,7 @@ class LevelItemAdapter() : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-    var levelClick: ((Level) -> Unit)? = null
+    private var levelClick: ((Level) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
@@ -35,6 +35,10 @@ class LevelItemAdapter() : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
         )
 
         return ViewHolder(binding)
+    }
+
+    fun setItemCallback(itemClick: ((Level) -> Unit)?) {
+        this.levelClick = itemClick
     }
 
     class ViewHolder(val binding: ItemLevelBinding) : RecyclerView.ViewHolder(binding.root)

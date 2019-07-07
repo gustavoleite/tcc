@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
-import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.databinding.ActivityHomeBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -21,23 +22,41 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        binding.viewModel = viewModel
-        setupList()
+        setupBinding()
+        setupRecyclerView()
+        setupObservers()
+        viewModel.setup()
     }
 
-    private fun setupList() {
+    private fun setupBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        binding.viewModel = viewModel
+    }
+
+    private fun setupRecyclerView() {
         binding.homeRecyclerView.apply {
             layoutManager = GridLayoutManager(this@HomeActivity, 3)
             adapter = listAdapter
         }
+        listAdapter.setItemCallback { level ->
+            viewModel.fetchLevelDetail(level.id)
+        }
+    }
 
-        listAdapter.list = listOf(
-            Level("asd", "As notas", "1"),
-            Level("asd", "Soma", "2"),
-            Level("asd", "Preços", "3"),
-            Level("asd", "Compras", "4"),
-            Level("asd", "Troco", "5")
-        )
+    private fun setupObservers() {
+        with(viewModel) {
+            levelList.observe(this@HomeActivity, Observer {
+                listAdapter.list = it
+            })
+            requestInfo.observe(this@HomeActivity, Observer {
+                showMessage(it)
+            })
+        }
+    }
+
+    private fun showMessage(message: String) {
+        Snackbar
+            .make(binding.homeMoneyIcon, message, Snackbar.LENGTH_LONG)
+            .show()
     }
 }

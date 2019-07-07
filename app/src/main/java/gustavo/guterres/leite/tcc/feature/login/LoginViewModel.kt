@@ -13,7 +13,8 @@ import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel(
     private val repository: LoginRepository,
-    private val resourceProvider: ResourceProvider) : BaseViewModel() {
+    private val resourceProvider: ResourceProvider
+) : BaseViewModel() {
 
     val email = ObservableField<String>()
     val password = ObservableField<String>()
