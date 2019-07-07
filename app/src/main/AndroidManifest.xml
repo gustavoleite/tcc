@@ -14,8 +14,7 @@
             android:name=".feature.home.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".feature.level.LevelActivity"
@@ -26,7 +25,12 @@
         <activity
             android:name=".feature.origination.OriginationActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".feature.login.LoginActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

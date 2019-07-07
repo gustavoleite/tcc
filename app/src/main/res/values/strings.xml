@@ -14,4 +14,7 @@
     <string name="origination_error_info">Preencha todos os campos</string>
     <string name="origination_request_error">Ocorreu um erro ao criar a conta, verifique sua conexão e tente novamente.</string>
     <string name="origination_request_success">"Conta criada com sucesso!"</string>
+
+    <string name="login_button">Entrar</string>
+    <string name="login_request_error">Não foi possível autenticar, verifique os seus dados e tente novamente.</string>
 </resources>

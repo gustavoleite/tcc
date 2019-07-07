@@ -1,6 +1,7 @@
 package gustavo.guterres.leite.tcc.feature.origination
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -31,6 +32,11 @@ class OriginationActivity : AppCompatActivity() {
         with(viewModel) {
             message.observe(this@OriginationActivity, Observer {
                 showMessage(it)
+            })
+            navigation.observe(this@OriginationActivity, Observer {
+                Handler().postDelayed({
+                    finish()
+                }, 2500)
             })
         }
     }

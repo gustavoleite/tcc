@@ -1,18 +1,21 @@
 package gustavo.guterres.leite.tcc.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import io.reactivex.Single
 
-class OriginationRepositoryImpl(private val auth: FirebaseAuth) : OriginationRepository {
+class LoginRepositoryImpl(private val auth: FirebaseAuth) : LoginRepository {
 
-    override fun createAccount(email: String, password: String): Single<Boolean> {
+    override fun signInWith(email: String, password: String): Single<FirebaseUser> {
 
         return Single.create { emitter ->
 
-            auth.createUserWithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        emitter.onSuccess(true)
+                        auth.currentUser?.let {
+                            emitter.onSuccess(it)
+                        }
                     } else {
                         emitter.onError(task.exception ?: Exception("Generic request message"))
                     }

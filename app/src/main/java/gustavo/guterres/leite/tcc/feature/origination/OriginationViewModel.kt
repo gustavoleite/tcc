@@ -11,8 +11,8 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class OriginationViewModel(
-    val repository: OriginationRepository,
-    val resourceProvider: ResourceProvider
+    private val repository: OriginationRepository,
+    private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
     val email = ObservableField<String>()
@@ -20,6 +20,7 @@ class OriginationViewModel(
     val passwordConfirmation = ObservableField<String>()
 
     val message = MutableLiveData<String>()
+    val navigation = MutableLiveData<Unit>()
 
     fun onCreateAccountClick() {
         if (isValidData()) {
@@ -37,6 +38,7 @@ class OriginationViewModel(
 
     private fun onCreatedAccountWithSuccess(response: Boolean) {
         message.value = resourceProvider.getString(R.string.origination_request_success)
+        navigation.value = Unit
     }
 
     private fun onError(throwable: Throwable) {
