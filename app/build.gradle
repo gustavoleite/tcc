@@ -32,6 +32,7 @@ android {
 ext {
     koin_version = '1.0.2'
     room_version = '2.1.0'
+    firebase_version = '17.0.0'
 }
 
 dependencies {
@@ -63,7 +64,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation "com.google.firebase:firebase-core:$firebase_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

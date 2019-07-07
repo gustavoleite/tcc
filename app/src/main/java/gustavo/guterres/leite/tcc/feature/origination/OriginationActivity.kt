@@ -29,15 +29,15 @@ class OriginationActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         with(viewModel) {
-            invalidData.observe(this@OriginationActivity, Observer {
-                showInvalidDataError()
+            message.observe(this@OriginationActivity, Observer {
+                showMessage(it)
             })
         }
     }
 
-    private fun showInvalidDataError() {
+    private fun showMessage(message: String) {
         Snackbar
-            .make(binding.originationEmail, getString(R.string.origination_error_info), Snackbar.LENGTH_SHORT)
+            .make(binding.originationEmail, message, Snackbar.LENGTH_SHORT)
             .show()
     }
 }
