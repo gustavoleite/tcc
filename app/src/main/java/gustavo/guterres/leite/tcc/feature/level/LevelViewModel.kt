@@ -20,7 +20,6 @@ class LevelViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val levels = MutableLiveData<List<Level>>()
     val close = MutableLiveData<Unit>()
 
     val currentStep = ObservableInt()
@@ -28,47 +27,16 @@ class LevelViewModel(
     val progressInfo = ObservableField<String>()
 
     init {
-        fillData()
-
         currentStep.addOnPropertyChangedCallback(onCurrentStepChange())
+    }
+
+    fun setup(level: Level) {
+        this.totalStep.set(level.steps?.size ?: 0)
+        this.currentStep.set(1)
     }
 
     fun onCloseClick() {
         close.value = Unit
-    }
-
-    fun fillData() {
-        repository
-            .saveLevel(getDataMock())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::onFillDataSuccess, this::onError)
-            .addTo(compositeDisposable)
-    }
-
-    private fun onFillDataSuccess() {
-        Log.d("Dados inseridos", "Com sucesso!")
-        fetchData()
-    }
-
-    fun fetchData() {
-        repository
-            .getLevels("1")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::onLevelsFetched, this::onError)
-            .addTo(compositeDisposable)
-    }
-
-    private fun onLevelsFetched(levels: List<Level>) {
-        this.levels.value = levels
-        this.totalStep.set(levels.first().steps?.size ?: 0)
-        this.currentStep.set(1)
-        Log.d("Dados encontrados:", levels.toString())
-    }
-
-    private fun onError(throwable: Throwable) {
-        Log.d("Errrooooouuuu!", throwable.message)
     }
 
     private fun onCurrentStepChange(): Observable.OnPropertyChangedCallback {

@@ -16,6 +16,7 @@ class HomeViewModel(
 ) : BaseViewModel() {
 
     val levelList = MutableLiveData<List<Level>>()
+    val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
 
     fun setup() {
@@ -23,16 +24,25 @@ class HomeViewModel(
             .fetchLevelsBrief()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::setData, this::onError)
+            .subscribe(this::setLevelBrief, this::onError)
             .addTo(compositeDisposable)
     }
 
     fun fetchLevelDetail(id: String) {
-
+        repository
+            .fetchLevelDetail(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::setLevel, this::onError)
+            .addTo(compositeDisposable)
     }
 
-    private fun setData(response: List<Level>) {
+    private fun setLevelBrief(response: List<Level>) {
         levelList.value = response
+    }
+
+    private fun setLevel(response: Level) {
+        level.value = response
     }
 
     private fun onError(throwable: Throwable) {

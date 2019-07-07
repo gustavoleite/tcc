@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface HomeRepository {
     fun fetchLevelsBrief(): Single<List<Level>>
-    fun fetchLevelDetail(id: String): Single<Level>
+    fun fetchLevelDetail(identifier: String): Single<Level>
 }

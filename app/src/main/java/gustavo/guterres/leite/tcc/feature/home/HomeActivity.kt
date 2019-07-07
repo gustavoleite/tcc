@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.databinding.ActivityHomeBinding
+import gustavo.guterres.leite.tcc.feature.level.LevelActivity
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -47,6 +48,9 @@ class HomeActivity : AppCompatActivity() {
         with(viewModel) {
             levelList.observe(this@HomeActivity, Observer {
                 listAdapter.list = it
+            })
+            level.observe(this@HomeActivity, Observer {
+                startActivity(LevelActivity.newInstance(this@HomeActivity, it))
             })
             requestInfo.observe(this@HomeActivity, Observer {
                 showMessage(it)

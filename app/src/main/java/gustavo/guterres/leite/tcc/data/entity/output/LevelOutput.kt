@@ -1,7 +1,5 @@
 package gustavo.guterres.leite.tcc.data.entity.output
 
-import gustavo.guterres.leite.tcc.data.entity.model.Step
-
 data class LevelOutput(
 
     var id: Int? = null,
@@ -10,5 +8,5 @@ data class LevelOutput(
 
     val number: Long? = null,
 
-    val steps: List<Step>? = null
+    val steps: List<StepOutput>? = null
 )

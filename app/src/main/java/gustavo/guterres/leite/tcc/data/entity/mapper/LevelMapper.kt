@@ -28,7 +28,7 @@ object LevelMapper {
                 id.toString(),
                 name.orEmpty(),
                 number.toString(),
-                null
+                StepMapper.toList(steps)
             )
         }
     }

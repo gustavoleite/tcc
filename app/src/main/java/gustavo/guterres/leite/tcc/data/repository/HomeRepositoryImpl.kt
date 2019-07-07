@@ -16,15 +16,15 @@ class HomeRepositoryImpl(private val firebaseDatabase: FirebaseDatabase) : HomeR
         return Single.create { emitter ->
 
             firebaseDatabase
-                .getReference(LEVEL_BRIEF)
+                .getReference(LEVEL_BRIEF_PATH)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                         val levelList = mutableListOf<Level>()
 
                         dataSnapshot.children.mapIndexed { index, response ->
-                            response.getValue<LevelOutput>(LevelOutput::class.java)?.let { level ->
-                                levelList.add(LevelMapper.toLevel(level.apply { id = index }))
+                            response.getValue<LevelOutput>(LevelOutput::class.java)?.let { levelOutput ->
+                                levelList.add(LevelMapper.toLevel(levelOutput.apply { id = index }))
                             }
                         }
 
@@ -38,11 +38,29 @@ class HomeRepositoryImpl(private val firebaseDatabase: FirebaseDatabase) : HomeR
         }
     }
 
-    override fun fetchLevelDetail(id: String): Single<Level> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun fetchLevelDetail(identifier: String): Single<Level> {
+
+        return Single.create { emitter ->
+
+            firebaseDatabase
+                .getReference(LEVEL_PATH)
+                .child(identifier)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.getValue<LevelOutput>(LevelOutput::class.java)?.let { levelOutput ->
+                            emitter.onSuccess(LevelMapper.toLevel(levelOutput.apply { id = identifier.toInt() }))
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        emitter.onError(error.toException())
+                    }
+                })
+        }
     }
 
     companion object {
-        private const val LEVEL_BRIEF: String = "level-brief"
+        private const val LEVEL_BRIEF_PATH: String = "level-brief"
+        private const val LEVEL_PATH: String = "level"
     }
 }
