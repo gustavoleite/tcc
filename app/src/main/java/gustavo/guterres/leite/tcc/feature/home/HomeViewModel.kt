@@ -1,5 +1,7 @@
 package gustavo.guterres.leite.tcc.feature.home
 
+import android.view.View
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
@@ -15,6 +17,8 @@ class HomeViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
+    val loaderVisibility = ObservableInt(View.GONE)
+
     val levelList = MutableLiveData<List<Level>>()
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
@@ -24,6 +28,8 @@ class HomeViewModel(
             .fetchLevelsBrief()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
+            .doFinally { loaderVisibility.set(View.GONE) }
             .subscribe(this::setLevelBrief, this::onError)
             .addTo(compositeDisposable)
     }
@@ -33,6 +39,8 @@ class HomeViewModel(
             .fetchLevelDetail(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
+            .doFinally { loaderVisibility.set(View.GONE) }
             .subscribe(this::setLevel, this::onError)
             .addTo(compositeDisposable)
     }

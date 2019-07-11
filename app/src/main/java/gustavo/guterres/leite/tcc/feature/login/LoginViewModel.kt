@@ -1,6 +1,8 @@
 package gustavo.guterres.leite.tcc.feature.login
 
+import android.view.View
 import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import gustavo.guterres.leite.tcc.R
@@ -18,6 +20,7 @@ class LoginViewModel(
 
     val email = ObservableField<String>()
     val password = ObservableField<String>()
+    val loaderVisibility = ObservableInt(View.GONE)
 
     val message = MutableLiveData<String>()
     val navigation = MutableLiveData<LoginNavigation>()
@@ -27,6 +30,8 @@ class LoginViewModel(
             .signInWith(email.get().orEmpty(), password.get().orEmpty())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
+            .doFinally { loaderVisibility.set(View.GONE) }
             .subscribe(this::onSignedWithSuccess, this::onError)
             .addTo(compositeDisposable)
     }

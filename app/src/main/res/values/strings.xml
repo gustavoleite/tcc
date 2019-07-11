@@ -13,6 +13,7 @@
     <string name="origination_password_confirmation">Confirme a senha</string>
     <string name="origination_create_account">Criar conta</string>
     <string name="origination_error_info">Preencha todos os campos</string>
+    <string name="origination_error_diff">As senhas devem ser iguais!</string>
     <string name="origination_request_error">Ocorreu um erro ao criar a conta, verifique sua conexão e tente novamente.</string>
     <string name="origination_request_success">"Conta criada com sucesso!"</string>
 
