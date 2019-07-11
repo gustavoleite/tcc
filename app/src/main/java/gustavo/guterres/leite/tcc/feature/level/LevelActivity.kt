@@ -59,8 +59,11 @@ class LevelActivity : AppCompatActivity() {
     private fun navigateToNextStep() {
         with(viewModel) {
             currentStep.set(currentStep.get().inc())
-            if (stepsFragment.size >= currentStep.get())
+            if (stepsFragment.size >= currentStep.get()) {
                 replaceFragment(stepsFragment[currentStep.get() - 1])
+            } else {
+                finish()
+            }
         }
     }
 
