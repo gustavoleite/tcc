@@ -9,7 +9,6 @@ import org.koin.standalone.KoinComponent
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import gustavo.guterres.leite.tcc.BaseApplication
 import gustavo.guterres.leite.tcc.databinding.ComponentActionViewBinding
 import org.koin.standalone.inject
 
@@ -36,10 +35,6 @@ class ActionView @JvmOverloads constructor(
     }
 
     private fun inflateLayout(context: Context) {
-        takeIf { isInEditMode }?.run {
-            BaseApplication()
-        }
-
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(context),
             R.layout.component_action_view,
