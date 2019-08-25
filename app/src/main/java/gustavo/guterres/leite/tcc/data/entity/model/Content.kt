@@ -10,8 +10,8 @@ data class Content(
     val spotlights: List<Spotlight>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.createTypedArrayList(Spotlight)
+        parcel.readString().orEmpty(),
+        parcel.createTypedArrayList(Spotlight)!!
     ) {
     }
 

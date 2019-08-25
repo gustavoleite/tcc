@@ -17,11 +17,11 @@ data class Step(
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString().orEmpty(),
         parcel.readDouble(),
-        parcel.readParcelable(Content::class.java.classLoader),
-        parcel.createTypedArrayList(Action),
-        parcel.readString()
+        parcel.readParcelable(Content::class.java.classLoader)!!,
+        parcel.createTypedArrayList(Action)!!,
+        parcel.readString().orEmpty()
     ) {
     }
 

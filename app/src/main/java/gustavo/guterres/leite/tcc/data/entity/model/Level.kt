@@ -14,8 +14,8 @@ data class Level(
     val steps: List<Step>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
         parcel.readString(),
         parcel.createTypedArrayList(Step)
     ) {

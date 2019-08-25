@@ -12,7 +12,7 @@ data class Action(
     val image: Int? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString().orEmpty(),
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int
     ) {
