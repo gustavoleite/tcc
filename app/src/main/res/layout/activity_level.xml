@@ -23,7 +23,7 @@
             app:fvBackgroundDrawable="@drawable/load_progress"
             app:fvCurrentProgress="@{viewModel.currentStep}"
             app:fvMaxValue="@{viewModel.totalStep}"
-            app:fvStartButtonDrawable="@drawable/ic_round_cancel"
+            app:fvStartButtonDrawable="@drawable/ic_arrow_back"
             app:fvStartButtonOnClick="@{() -> viewModel.onCloseClick()}"
             app:fvText="@{viewModel.progressInfo}"
             app:fvTextColor="@color/primaryTextColor"

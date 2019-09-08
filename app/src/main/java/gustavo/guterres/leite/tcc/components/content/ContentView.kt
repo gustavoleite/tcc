@@ -87,7 +87,7 @@ class ContentView @JvmOverloads constructor(
 
     private fun setupList(context: Context) {
         binding.cvRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+          //  layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listAdapter
         }
     }

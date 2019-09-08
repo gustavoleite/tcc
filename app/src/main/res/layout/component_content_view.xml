@@ -5,29 +5,32 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         <TextView
                 android:id="@+id/cv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:gravity="center_horizontal"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="2dp"
                 android:maxLines="3"
+                android:paddingStart="46dp"
+                android:paddingEnd="46dp"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="34sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Quantos reais temos\nsomando essas notas?" />
+                tools:text="Quantos reais temossomasdnoisd siajoi sai" />
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cv_recycler_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primaryColor"
+            android:background="@drawable/pattern_background"
             tools:context=".feature.home.HomeActivity">
 
         <ImageView
@@ -31,12 +31,11 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:text="@string/home_app_name"
-                android:textColor="@android:color/white"
+                android:textColor="@color/secondaryDarkColor"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +46,9 @@
                 android:id="@+id/home_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:clipChildren="false"
+                tools:listitem="@layout/item_level"
+                tools:itemCount="1"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
