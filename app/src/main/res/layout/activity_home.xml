@@ -16,44 +16,57 @@
             android:background="@drawable/pattern_background"
             tools:context=".feature.home.HomeActivity">
 
-        <ImageView
-                android:id="@+id/home_money_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_money"
-                app:layout_constraintBottom_toTopOf="@+id/home_recycler_view"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-
-        <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:text="@string/home_app_name"
-                android:textColor="@color/secondaryDarkColor"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/home_money_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycler_view"
                 android:layout_width="match_parent"
+                android:paddingTop="64dp"
+                android:clipToPadding="false"
                 android:layout_height="0dp"
                 android:clipChildren="false"
-                tools:listitem="@layout/item_level"
-                tools:itemCount="1"
-                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_level" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:background="@drawable/home_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/home_money_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_money"
+                    app:layout_constraintBottom_toBottomOf="@id/home_app_name"
+                    app:layout_constraintEnd_toStartOf="@+id/home_app_name"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/home_app_name" />
+
+            <TextView
+                    android:id="@+id/home_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="@string/home_app_name"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/home_money_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
                 android:layout_width="wrap_content"
