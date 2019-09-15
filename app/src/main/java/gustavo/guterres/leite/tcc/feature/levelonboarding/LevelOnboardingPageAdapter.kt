@@ -8,7 +8,7 @@ import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 
 class LevelOnboardingPageAdapter(
     fragmentManager: FragmentManager,
-    private val onboadingList: ArrayList<Onboarding>
+    private val onboadingList: List<Onboarding>
 ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {

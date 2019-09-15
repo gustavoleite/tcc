@@ -8,5 +8,7 @@ data class LevelOutput(
 
     val number: Long? = null,
 
-    val steps: List<StepOutput>? = null
+    val steps: List<StepOutput>? = null,
+
+    val onboardings: List<OnboardingOutput>? = null
 )

@@ -12,6 +12,7 @@ import gustavo.guterres.leite.tcc.data.room.TCCDatabase
 import gustavo.guterres.leite.tcc.feature.home.HomeViewModel
 import gustavo.guterres.leite.tcc.feature.home.LevelItemAdapter
 import gustavo.guterres.leite.tcc.feature.level.LevelViewModel
+import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboardingViewModel
 import gustavo.guterres.leite.tcc.feature.login.LoginViewModel
 import gustavo.guterres.leite.tcc.feature.origination.OriginationViewModel
 import gustavo.guterres.leite.tcc.feature.step.StepViewModel
@@ -33,6 +34,7 @@ val viewModelModule = module {
     viewModel { OriginationViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { (onboarding: Onboarding) -> OnboardingViewModel(onboarding) }
+    viewModel { (totalScreens: Int) -> LevelOnboardingViewModel(totalScreens) }
 }
 
 val adaptersModule = module {

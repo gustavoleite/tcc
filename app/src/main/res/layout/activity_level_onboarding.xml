@@ -7,15 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryDarkColor"
-        tools:context=".feature.levelonboarding.LevelOnboadingActivity">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_onboarding_ok"
-            app:layout_constraintBottom_toBottomOf="@id/level_onboarding_dots"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/level_onboarding_dots" />
+        tools:context=".feature.levelonboarding.LevelOnboardingActivity">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/level_onboarding_view_pager"
@@ -38,6 +30,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/secondaryColor"
+            android:fontFamily="@font/montserrat_bold"
+            android:onClick="@{() -> viewModel.onOkClick()}"
+            android:text="@string/level_onboarding_ok"
+            android:textColor="@android:color/white"
+            android:visibility="@{viewModel.okButtonVisibility}"
+            app:layout_constraintBottom_toBottomOf="@id/level_onboarding_dots"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/level_onboarding_dots" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

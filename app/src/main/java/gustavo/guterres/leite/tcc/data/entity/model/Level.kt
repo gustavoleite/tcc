@@ -11,21 +11,24 @@ data class Level(
 
     val number: String? = null,
 
-    val steps: List<Step>? = null
+    val steps: List<Step>? = null,
+
+    val onboardings: List<Onboarding>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
         parcel.readString(),
-        parcel.createTypedArrayList(Step)
-    ) {
-    }
+        parcel.createTypedArrayList(Step),
+        parcel.createTypedArrayList(Onboarding)
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(number)
         parcel.writeTypedList(steps)
+        parcel.writeTypedList(onboardings)
     }
 
     override fun describeContents(): Int {
