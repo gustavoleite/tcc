@@ -1,62 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_height="64dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            tools:layout_height="64dp">
 
         <ImageView
-            android:id="@+id/fv_start_image_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/fv_progress_view"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_round_cancel" />
+                android:id="@+id/fv_start_image_view"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="10dp"
+                android:clipChildren="false"
+                android:foreground="?selectableItemBackgroundBorderless"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fv_progress_view"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_arrow_back" />
 
         <gustavo.guterres.leite.tcc.components.progress.ProgressView
-            android:id="@+id/fv_progress_view"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:backgroundDrawable="@drawable/load_progress"
-            app:currentProgress="60"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/fv_end_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/fv_start_image_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="512dp"
-            app:text="5/10"
-            app:textColor="@color/primaryTextColor"
-            app:textSize="18sp" />
+                android:id="@+id/fv_progress_view"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:backgroundDrawable="@drawable/load_progress"
+                app:currentProgress="60"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fv_end_button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/fv_start_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="512dp"
+                app:text="5/10"
+                app:textColor="@color/primaryTextColor"
+                app:textSize="18sp" />
 
         <TextView
-            android:id="@+id/fv_end_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:lines="2"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/fv_progress_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:drawableStart="@drawable/ic_monetization"
-            tools:text="R$ 124,15" />
+                android:id="@+id/fv_end_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/fv_progress_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:drawableStart="@drawable/ic_monetization"
+                tools:text="R$ 124,15" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

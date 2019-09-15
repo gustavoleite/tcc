@@ -11,7 +11,6 @@ import androidx.annotation.Dimension
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
-import androidx.recyclerview.widget.LinearLayoutManager
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.databinding.ComponentContentViewBinding
@@ -87,11 +86,9 @@ class ContentView @JvmOverloads constructor(
 
     private fun setupList(context: Context) {
         binding.cvRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = listAdapter
         }
     }
-
 
    companion object {
 
