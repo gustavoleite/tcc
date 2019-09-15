@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gustavo.guterres.leite.tcc">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -30,6 +28,11 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
+            android:name=".feature.levelonboarding.LevelOnboadingActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".feature.login.LoginActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
@@ -40,5 +43,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

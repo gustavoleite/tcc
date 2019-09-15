@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.databinding.ActivityHomeBinding
 import gustavo.guterres.leite.tcc.feature.level.LevelActivity
+import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboadingActivity
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -50,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
                 listAdapter.list = it
             })
             level.observe(this@HomeActivity, Observer {
-                startActivity(LevelActivity.newInstance(this@HomeActivity, it))
+                startActivity(Intent(this@HomeActivity, LevelOnboadingActivity::class.java))
             })
             requestInfo.observe(this@HomeActivity, Observer {
                 showMessage(it)
