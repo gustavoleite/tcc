@@ -5,11 +5,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import gustavo.guterres.leite.tcc.components.action.ActionViewItemAdapter
 import gustavo.guterres.leite.tcc.components.content.ContentViewItemAdapter
+import gustavo.guterres.leite.tcc.components.onboarding.OnboardingViewModel
+import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 import gustavo.guterres.leite.tcc.data.repository.*
 import gustavo.guterres.leite.tcc.data.room.TCCDatabase
 import gustavo.guterres.leite.tcc.feature.home.HomeViewModel
 import gustavo.guterres.leite.tcc.feature.home.LevelItemAdapter
 import gustavo.guterres.leite.tcc.feature.level.LevelViewModel
+import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboardingViewModel
 import gustavo.guterres.leite.tcc.feature.login.LoginViewModel
 import gustavo.guterres.leite.tcc.feature.origination.OriginationViewModel
 import gustavo.guterres.leite.tcc.feature.step.StepViewModel
@@ -30,6 +33,8 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel { OriginationViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
+    viewModel { (onboarding: Onboarding) -> OnboardingViewModel(onboarding) }
+    viewModel { (totalScreens: Int) -> LevelOnboardingViewModel(totalScreens) }
 }
 
 val adaptersModule = module {
