@@ -29,37 +29,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <Spinner
+            android:id="@+id/login_school_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_title"/>
+
+        <Spinner
+            android:id="@+id/login_classroom_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/origination_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_title">
+            app:layout_constraintTop_toBottomOf="@+id/login_school_spinner"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:text="@={viewModel.email}" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        <Spinner
+            android:id="@+id/login_student_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_classroom_spinner"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/origination_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_email">
+            app:layout_constraintTop_toBottomOf="@+id/login_student_spinner">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -70,26 +83,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_create_aacount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            android:onClick="@{() -> viewModel.onCreateAccountLogin()}"
-            android:text="@string/origination_create_account"
-            app:layout_constraintBottom_toTopOf="@+id/login_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
             android:background="@drawable/flat_button_background_selector"
             android:onClick="@{() -> viewModel.onLoginClick()}"
             android:text="@string/login_button"

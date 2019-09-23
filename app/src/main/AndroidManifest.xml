@@ -23,11 +23,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".feature.origination.OriginationActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity
             android:name=".feature.levelonboarding.LevelOnboardingActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
