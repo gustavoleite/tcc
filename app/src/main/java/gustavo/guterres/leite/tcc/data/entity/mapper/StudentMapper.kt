@@ -18,7 +18,8 @@ object StudentMapper {
                 name,
                 hits,
                 mistakes,
-                currentLevel
+                currentLevel,
+                accumulatedPoints
             )
         }
     }

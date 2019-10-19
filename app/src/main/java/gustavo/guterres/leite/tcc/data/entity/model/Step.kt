@@ -22,8 +22,7 @@ data class Step(
         parcel.readParcelable(Content::class.java.classLoader)!!,
         parcel.createTypedArrayList(Action)!!,
         parcel.readString().orEmpty()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
