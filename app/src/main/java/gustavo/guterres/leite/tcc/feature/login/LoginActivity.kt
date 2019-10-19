@@ -8,8 +8,12 @@ import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.feature.home.HomeActivity
-import gustavo.guterres.leite.tcc.feature.origination.OriginationActivity
 import org.koin.android.viewmodel.ext.android.viewModel
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.AdapterView
+import android.view.View
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
         setupObservers()
+        viewModel.setupFirebaseAuth()
     }
 
     private fun setupBinding() {
@@ -37,6 +42,45 @@ class LoginActivity : AppCompatActivity() {
             navigation.observe(this@LoginActivity, Observer {
                 handleNavigation(it)
             })
+            schools.observe(this@LoginActivity, Observer {
+                binding.loginSchoolSpinner.apply {
+                    setupSpinner(this, it)
+                    onItemSelectedListener = onItemSelectedListener {
+                        viewModel.loadClassroomsOptions(selectedItem as String)
+                    }
+                }
+            })
+            classrooms.observe(this@LoginActivity, Observer {
+                binding.loginClassroomSpinner.apply {
+                    setupSpinner(this, it)
+                    onItemSelectedListener = onItemSelectedListener {
+                        viewModel.loadStudentOptions(selectedItem as String)
+                    }
+                }
+            })
+            students.observe(this@LoginActivity, Observer {
+                binding.loginStudentSpinner.apply {
+                    setupSpinner(this, it)
+                    onItemSelectedListener = onItemSelectedListener {
+                        viewModel.selectedStudent = selectedItem as String
+                    }
+                }
+            })
+        }
+    }
+
+    private fun onItemSelectedListener(listener: () -> Unit): AdapterView.OnItemSelectedListener {
+        return object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                listener.invoke()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
 
@@ -47,17 +91,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleNavigation(loginNavigation: LoginNavigation) {
-        when(loginNavigation) {
-            LoginNavigation.CREATE_ACCCOUNT -> navigateToCreateAccount()
+        when (loginNavigation) {
             LoginNavigation.LOGIN -> navigateToHome()
         }
     }
 
-    private fun navigateToCreateAccount() {
-        startActivity(Intent(this, OriginationActivity::class.java))
-    }
-
     private fun navigateToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
+        finish()
+    }
+
+    fun setupSpinner(spinner: Spinner, items: List<String>) {
+        val spinnerArrayAdapter = ArrayAdapter<String>(
+            this, android.R.layout.simple_spinner_item,
+            items
+        )
+        spinnerArrayAdapter.setDropDownViewResource(
+            android.R.layout
+                .simple_spinner_dropdown_item
+        )
+        spinner.adapter = spinnerArrayAdapter
     }
 }

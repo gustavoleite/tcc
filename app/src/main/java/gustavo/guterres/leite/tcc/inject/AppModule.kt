@@ -14,7 +14,6 @@ import gustavo.guterres.leite.tcc.feature.home.LevelItemAdapter
 import gustavo.guterres.leite.tcc.feature.level.LevelViewModel
 import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboardingViewModel
 import gustavo.guterres.leite.tcc.feature.login.LoginViewModel
-import gustavo.guterres.leite.tcc.feature.origination.OriginationViewModel
 import gustavo.guterres.leite.tcc.feature.step.StepViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProviderImpl
@@ -31,8 +30,7 @@ val viewModelModule = module {
     viewModel { StepViewModel() }
     viewModel { LevelViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { OriginationViewModel(get(), get()) }
-    viewModel { LoginViewModel(get(), get()) }
+    viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { (onboarding: Onboarding) -> OnboardingViewModel(onboarding) }
     viewModel { (totalScreens: Int) -> LevelOnboardingViewModel(totalScreens) }
 }
@@ -78,7 +76,7 @@ val firebaseModule = module {
     } bind OriginationRepository::class
 
     factory {
-        LoginRepositoryImpl(get())
+        LoginRepositoryImpl(auth = get(), database = get())
     } bind LoginRepository::class
 
     factory {
