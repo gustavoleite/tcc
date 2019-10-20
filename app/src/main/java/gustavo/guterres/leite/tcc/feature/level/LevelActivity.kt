@@ -50,7 +50,8 @@ class LevelActivity : AppCompatActivity() {
     }
 
     private fun buildSteps(level: Level) {
-        stepsFragment = StepBuilder().getFragmentList(level.steps!!) {
+        stepsFragment = StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Double ->
+            viewModel.setUserAnswer(isRightAnswer, points)
             navigateToNextStep()
         }
         replaceFragment(stepsFragment.first())
@@ -62,6 +63,7 @@ class LevelActivity : AppCompatActivity() {
             if (stepsFragment.size >= currentStep.get()) {
                 replaceFragment(stepsFragment[currentStep.get() - 1])
             } else {
+                viewModel.updateStudentUser()
                 finish()
             }
         }

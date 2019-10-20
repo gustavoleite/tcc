@@ -17,7 +17,8 @@ object SchoolMapper {
         return with(output) {
             School(
                 name,
-                ClassroomMapper.toClassroomList(classrooms, studentList)
+                ClassroomMapper.toClassroomList(classrooms, studentList),
+                id
             )
         }
     }

@@ -90,7 +90,7 @@ class LoginRepositoryImpl(private val auth: FirebaseAuth, private val database: 
                     dataSnapshot.children.map { response ->
                         response.getValue<SchoolOutput>(SchoolOutput::class.java)
                             ?.let { schoolsOutput ->
-                                schoolsList.add(SchoolMapper.toSchool(schoolsOutput, students))
+                                schoolsList.add(SchoolMapper.toSchool(schoolsOutput.apply { id = response.key.orEmpty() }, students))
                             }
                     }
 

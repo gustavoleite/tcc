@@ -9,16 +9,16 @@ data class Student(
     val name: String,
     val hits: Int,
     val mistakes: Int,
-    val currentLevel: String,
-    val accumulatedPoints: Int
+    val currentLevel: Int,
+    val accumulatedPoints: Double
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString().orEmpty(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readDouble()
     ) {
     }
 
@@ -27,8 +27,8 @@ data class Student(
         parcel.writeString(name)
         parcel.writeInt(hits)
         parcel.writeInt(mistakes)
-        parcel.writeString(currentLevel)
-        parcel.writeInt(accumulatedPoints)
+        parcel.writeInt(currentLevel)
+        parcel.writeDouble(accumulatedPoints)
     }
 
     override fun describeContents(): Int {

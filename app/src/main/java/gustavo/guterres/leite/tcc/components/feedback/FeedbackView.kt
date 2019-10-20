@@ -133,5 +133,11 @@ class FeedbackView @JvmOverloads constructor(
         fun setFvStartButtonOnClick(view: FeedbackView, onClickListener: OnClickListener) {
             view.binding.fvStartImageView.setOnClickListener(onClickListener)
         }
+
+        @JvmStatic
+        @BindingAdapter("fvEndButtonText")
+        fun setFvEndButtonText(view: FeedbackView, value: ObservableField<String>) {
+            view.binding.fvEndButton.text = value.get()
+        }
     }
 }
