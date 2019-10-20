@@ -20,7 +20,6 @@ class HomeActivity : AppCompatActivity() {
     private val listAdapter: LevelItemAdapter by inject()
     private val viewModel: HomeViewModel by viewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN

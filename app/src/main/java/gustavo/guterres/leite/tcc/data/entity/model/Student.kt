@@ -5,12 +5,12 @@ import android.os.Parcelable
 import com.google.firebase.database.Exclude
 
 data class Student(
-    val id: String,
-    val name: String,
-    val hits: Int,
-    val mistakes: Int,
-    val currentLevel: Int,
-    val accumulatedPoints: Double
+    val id: String = "",
+    var name: String = "",
+    val hits: Int = 0,
+    val mistakes: Int = 0,
+    val currentLevel: Int = 0,
+    val accumulatedPoints: Double = 0.0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),

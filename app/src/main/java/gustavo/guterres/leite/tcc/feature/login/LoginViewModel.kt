@@ -28,7 +28,7 @@ class LoginViewModel(
     val loaderVisibility = ObservableInt(View.GONE)
 
     val message = MutableLiveData<String>()
-    val navigation = MutableLiveData<LoginNavigation>()
+    val navigation = MutableLiveData<Unit>()
     val schools = MutableLiveData<List<String>>()
     val classrooms = MutableLiveData<List<String>>()
     val students = MutableLiveData<List<String>>()
@@ -37,7 +37,7 @@ class LoginViewModel(
 
     lateinit var selectedSchool: String
     lateinit var selectedClassroom: String
-    lateinit var selectedStudent: String
+    var selectedStudent: Student = Student()
 
     fun setupFirebaseAuth() {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -48,7 +48,7 @@ class LoginViewModel(
         }
 
         FirebaseAuth.getInstance().currentUser?.let {
-            navigation.value = LoginNavigation.LOGIN
+            navigation.value = Unit
         } ?: fetchData()
     }
 
@@ -66,7 +66,6 @@ class LoginViewModel(
     fun onLoginClick() {
         loaderVisibility.set(View.VISIBLE)
 
-        lateinit var student: Student
         var path = "school/"
 
         schoolListResponse
@@ -81,9 +80,8 @@ class LoginViewModel(
                 it.students
             }
             .forEachIndexed { i, s ->
-                if (s.name == selectedStudent) {
-//                    path = path.plus(i)
-                    student = s
+                if (s.name == selectedStudent.name) {
+                    selectedStudent = s
                 }
             }
 
@@ -91,7 +89,7 @@ class LoginViewModel(
             .transformToEmailAndPasswordAccount(
                 getEmail(),
                 password.get().orEmpty(),
-                student,
+                selectedStudent,
                 path
             )
             .subscribeOn(Schedulers.io())
@@ -155,7 +153,7 @@ class LoginViewModel(
     }
 
     private fun onSignedWithSuccess(response: FirebaseUser) {
-        navigation.value = LoginNavigation.LOGIN
+        navigation.value = Unit
     }
 
     private fun onError(throwable: Throwable) {
