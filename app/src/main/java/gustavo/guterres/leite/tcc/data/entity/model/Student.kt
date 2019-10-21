@@ -7,10 +7,10 @@ import com.google.firebase.database.Exclude
 data class Student(
     val id: String = "",
     var name: String = "",
-    val hits: Int = 0,
-    val mistakes: Int = 0,
-    val currentLevel: Int = 0,
-    val accumulatedPoints: Double = 0.0
+    var hits: Int = 0,
+    var mistakes: Int = 0,
+    var currentLevel: Int = 0,
+    var accumulatedPoints: Double = 0.0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),

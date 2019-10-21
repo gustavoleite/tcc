@@ -1,7 +1,9 @@
 package gustavo.guterres.leite.tcc.feature.home
 
-import android.util.Log
 import android.view.View
+import androidx.databinding.Observable
+import androidx.databinding.ObservableDouble
+import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +14,7 @@ import gustavo.guterres.leite.tcc.data.repository.HomeRepository
 import gustavo.guterres.leite.tcc.data.repository.StudentRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
+import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
@@ -27,8 +30,12 @@ class HomeViewModel(
     val levelList = MutableLiveData<List<Level>>()
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
+    val points = ObservableDouble(0.00)
+    val accumulatedPoints = ObservableField<String>("R$ 0,00")
+    var authenticatedStudent: Student? = null
 
     fun setup() {
+        points.addOnPropertyChangedCallback(onPointsChange())
         fetchLevels()
         fetchStudentData()
     }
@@ -65,11 +72,31 @@ class HomeViewModel(
             .addTo(compositeDisposable)
     }
 
+    fun saveStudentData(student: Student) {
+        points.set(student.accumulatedPoints)
+
+        studentRepository
+            .saveStudentData(student)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(compositeDisposable)
+    }
+
     private fun onFetchStudentsSuccess(students: List<Student>) {
         students.filter {
             it.id == FirebaseAuth.getInstance().currentUser?.uid
         }.map {
-            Log.i("Estudante logado", it.name)
+            authenticatedStudent = it
+            points.set(it.accumulatedPoints)
+        }
+    }
+
+    private fun onPointsChange(): Observable.OnPropertyChangedCallback {
+        return object : Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                accumulatedPoints.set(points.get().toBrCurrency())
+            }
         }
     }
 

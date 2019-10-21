@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
+import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelOnboardingBinding
 import gustavo.guterres.leite.tcc.feature.level.LevelActivity
 import org.koin.core.parameter.parametersOf
@@ -65,7 +66,8 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
                 startActivity(
                     LevelActivity.newInstance(
                         this,
-                        it
+                        it,
+                        intent?.extras?.getParcelable(STUDENT_ONBOARDING_EXTRA_ARG)!!
                     )
                 )
                 finish()
@@ -76,11 +78,13 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
     companion object {
 
         private const val LEVEL_ONBOARDING_EXTRA_ARG = "LEVEL_ONBOARDING_EXTRA_ARG"
+        private const val STUDENT_ONBOARDING_EXTRA_ARG = "STUDENT_ONBOARDING_EXTRA_ARG"
 
-        fun newInstance(from: AppCompatActivity, level: Level): Intent {
+        fun newInstance(from: AppCompatActivity, level: Level, student: Student): Intent {
 
             return Intent(from, LevelOnboardingActivity::class.java).apply {
                 putExtra(LEVEL_ONBOARDING_EXTRA_ARG, level)
+                putExtra(STUDENT_ONBOARDING_EXTRA_ARG, student)
             }
         }
     }

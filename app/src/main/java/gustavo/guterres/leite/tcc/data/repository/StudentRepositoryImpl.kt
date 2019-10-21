@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.data.repository
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -9,7 +10,7 @@ import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.data.entity.output.StudentOutput
 import io.reactivex.Single
 
-class StudentRepositoryImpl(private val database: FirebaseDatabase) : StudentRepository {
+class StudentRepositoryImpl(private val database: FirebaseDatabase, private val auth: FirebaseAuth) : StudentRepository {
 
     override fun fetchStudents(): Single<List<Student>> {
 
@@ -39,6 +40,23 @@ class StudentRepositoryImpl(private val database: FirebaseDatabase) : StudentRep
                         emitter.onError(error.toException())
                     }
                 })
+        }
+    }
+
+    override fun saveStudentData(student: Student): Single<Boolean> {
+        return Single.create { emitter ->
+
+            database
+                .getReference(STUDENTS_PATH)
+                .child(auth.currentUser?.uid.orEmpty())
+                .ref
+                .setValue(student)
+                .addOnSuccessListener {
+                    emitter.onSuccess(true)
+                }
+                .addOnFailureListener {
+                    emitter.onError(it)
+                }
         }
     }
 

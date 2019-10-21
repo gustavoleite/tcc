@@ -47,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:transitionName="points"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:foreground="?selectableItemBackgroundBorderless"

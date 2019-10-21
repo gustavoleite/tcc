@@ -28,7 +28,7 @@ val resourceProviderModule = module {
 
 val viewModelModule = module {
     viewModel { StepViewModel() }
-    viewModel { LevelViewModel(get(), get(), get()) }
+    viewModel { LevelViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { (onboarding: Onboarding) -> OnboardingViewModel(onboarding) }
@@ -84,6 +84,6 @@ val firebaseModule = module {
     } bind HomeRepository::class
 
     factory {
-        StudentRepositoryImpl(database = get())
+        StudentRepositoryImpl(database = get(), auth = get())
     } bind StudentRepository::class
 }
