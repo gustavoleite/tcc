@@ -16,6 +16,7 @@ import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboardingActivit
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.core.app.ActivityOptionsCompat
+import androidx.databinding.ObservableInt
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.feature.level.LevelActivity.Companion.STUDENT_EXTRA_ARG
 import kotlinx.android.synthetic.main.activity_home.*
@@ -75,6 +76,9 @@ class HomeActivity : AppCompatActivity() {
             })
             requestInfo.observe(this@HomeActivity, Observer {
                 showMessage(it)
+            })
+            studentLevel.observe(this@HomeActivity, Observer {
+                listAdapter.studentLevel = ObservableInt(it)
             })
         }
     }

@@ -3,6 +3,7 @@ package gustavo.guterres.leite.tcc.feature.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableInt
 import androidx.recyclerview.widget.RecyclerView
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
@@ -16,11 +17,17 @@ class LevelItemAdapter : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
+    var studentLevel = ObservableInt(0)
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     private var levelClick: ((Level) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
-        val viewModel = LevelItemViewModel(list[position], levelClick)
+        val viewModel = LevelItemViewModel(list[position], position, levelClick, studentLevel)
         binding.viewModel = viewModel
     }
 

@@ -30,6 +30,7 @@ class HomeViewModel(
     val levelList = MutableLiveData<List<Level>>()
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
+    val studentLevel = MutableLiveData<Int>()
     val points = ObservableDouble(0.00)
     val accumulatedPoints = ObservableField<String>("R$ 0,00")
     var authenticatedStudent: Student? = null
@@ -73,7 +74,7 @@ class HomeViewModel(
     }
 
     fun saveStudentData(student: Student) {
-        points.set(student.accumulatedPoints)
+        updateUI(student)
 
         studentRepository
             .saveStudentData(student)
@@ -88,8 +89,13 @@ class HomeViewModel(
             it.id == FirebaseAuth.getInstance().currentUser?.uid
         }.map {
             authenticatedStudent = it
-            points.set(it.accumulatedPoints)
+            updateUI(it)
         }
+    }
+
+    private fun updateUI(student: Student) {
+        points.set(student.accumulatedPoints)
+        studentLevel.value = student.currentLevel
     }
 
     private fun onPointsChange(): Observable.OnPropertyChangedCallback {
