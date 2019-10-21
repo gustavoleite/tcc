@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1017866089573",
+    "firebase_url": "https://tcc-ifrs-2019.firebaseio.com",
+    "project_id": "tcc-ifrs-2019",
+    "storage_bucket": "tcc-ifrs-2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017866089573:android:c7573d1dd1905eab",
+        "android_client_info": {
+          "package_name": "gustavo.guterres.leite.tcc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017866089573-gh754lli4gsn9knu6ir9tv7obg384jsf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gustavo.guterres.leite.tcc",
+            "certificate_hash": "f731fc40a905836aa772b1768f5033192d0ab15f"
+          }
+        },
+        {
+          "client_id": "1017866089573-63977hr193vq46lsuo0c85j4g9rqdtp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEvt2i50t19Uyd6o3cWof8v8ZSjzayGrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017866089573-63977hr193vq46lsuo0c85j4g9rqdtp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
