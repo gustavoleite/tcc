@@ -8,8 +8,8 @@ import gustavo.guterres.leite.tcc.data.entity.output.StudentOutput
 object ClassroomMapper {
 
     fun toClassroomList(outputList: List<ClassroomOutput>, studentList: List<Student>): List<Classroom> {
-        return outputList.map {
-            toClassroom(it, studentList)
+        return outputList.mapIndexed { index, classroom ->
+            toClassroom(classroom, studentList).apply { id = index.toString() }
         }
     }
 
@@ -27,7 +27,8 @@ object ClassroomMapper {
 
             Classroom(
                 name,
-                newStudents
+                newStudents,
+                id
             )
         }
     }

@@ -5,17 +5,20 @@ import android.os.Parcelable
 
 data class School(
     val name: String,
-    val classrooms : List<Classroom>
+    val classrooms : List<Classroom>,
+    val id: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
-        parcel.createTypedArrayList(Classroom)!!
+        parcel.createTypedArrayList(Classroom)!!,
+        parcel.readString().orEmpty()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeTypedList(classrooms)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

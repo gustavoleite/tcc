@@ -54,7 +54,7 @@ class StepFragment : Fragment() {
             takeIf { isRightAnswer }
                 ?.run { Toast.makeText(this@StepFragment.context, "Resposta correta!", Toast.LENGTH_SHORT).show() }
                 ?: run { Toast.makeText(this@StepFragment.context, "Resposta errada!", Toast.LENGTH_SHORT).show() }
-            onStepFinishedCallback?.invoke()
+            onStepFinishedCallback?.invoke(isRightAnswer, getStep().points)
         })
     }
 
@@ -66,9 +66,9 @@ class StepFragment : Fragment() {
     companion object {
 
         private const val STEP_EXTRA_ARG = "STEP_EXTRA_ARG"
-        private var onStepFinishedCallback: (() -> Unit)? = null
+        private var onStepFinishedCallback: ((isRightAnswer: Boolean, points: Double) -> Unit)? = null
 
-        fun newInstance(step: Step, onStepFinished: () -> Unit): StepFragment {
+        fun newInstance(step: Step, onStepFinished: (isRightAnswer: Boolean, points: Double) -> Unit): StepFragment {
 
             onStepFinishedCallback = onStepFinished
 

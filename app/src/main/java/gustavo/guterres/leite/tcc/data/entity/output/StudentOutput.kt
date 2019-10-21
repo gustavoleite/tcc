@@ -7,5 +7,6 @@ data class StudentOutput(
     val name: String = "",
     val hits: Int = 0,
     val mistakes: Int = 0,
-    val currentLevel: String = ""
+    val currentLevel: Int = 0,
+    val accumulatedPoints: Double = 0.0
 )

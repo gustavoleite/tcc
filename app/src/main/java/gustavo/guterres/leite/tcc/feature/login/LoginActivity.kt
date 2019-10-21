@@ -14,7 +14,6 @@ import android.widget.Spinner
 import android.widget.AdapterView
 import android.view.View
 
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: gustavo.guterres.leite.tcc.databinding.ActivityLoginBinding
@@ -40,7 +39,9 @@ class LoginActivity : AppCompatActivity() {
                 showMessage(it)
             })
             navigation.observe(this@LoginActivity, Observer {
-                handleNavigation(it)
+                it?.let {
+                    navigateToHome()
+                }
             })
             schools.observe(this@LoginActivity, Observer {
                 binding.loginSchoolSpinner.apply {
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 binding.loginStudentSpinner.apply {
                     setupSpinner(this, it)
                     onItemSelectedListener = onItemSelectedListener {
-                        viewModel.selectedStudent = selectedItem as String
+                        viewModel.selectedStudent.name = selectedItem as String
                     }
                 }
             })
@@ -88,12 +89,6 @@ class LoginActivity : AppCompatActivity() {
         Snackbar
             .make(binding.loginButton, message, Snackbar.LENGTH_SHORT)
             .show()
-    }
-
-    private fun handleNavigation(loginNavigation: LoginNavigation) {
-        when (loginNavigation) {
-            LoginNavigation.LOGIN -> navigateToHome()
-        }
     }
 
     private fun navigateToHome() {

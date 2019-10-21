@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.School
+import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.data.repository.LoginRepository
 import gustavo.guterres.leite.tcc.data.repository.OriginationRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
@@ -27,27 +28,27 @@ class LoginViewModel(
     val loaderVisibility = ObservableInt(View.GONE)
 
     val message = MutableLiveData<String>()
-    val navigation = MutableLiveData<LoginNavigation>()
+    val navigation = MutableLiveData<Unit>()
     val schools = MutableLiveData<List<String>>()
     val classrooms = MutableLiveData<List<String>>()
     val students = MutableLiveData<List<String>>()
 
-    private lateinit var fetchDataResponse: List<School>
+    private lateinit var schoolListResponse: List<School>
 
     lateinit var selectedSchool: String
     lateinit var selectedClassroom: String
-    lateinit var selectedStudent: String
+    var selectedStudent: Student = Student()
 
     fun setupFirebaseAuth() {
         val currentUser = FirebaseAuth.getInstance().currentUser
 
-        if (currentUser?.isAnonymous == true) {FirebaseAuth.getInstance().currentUser
+        if (currentUser?.isAnonymous == true) {
             currentUser.delete()
             FirebaseAuth.getInstance().signOut()
         }
 
         FirebaseAuth.getInstance().currentUser?.let {
-            navigation.value = LoginNavigation.LOGIN
+            navigation.value = Unit
         } ?: fetchData()
     }
 
@@ -63,11 +64,36 @@ class LoginViewModel(
     }
 
     fun onLoginClick() {
+        loaderVisibility.set(View.VISIBLE)
+
+        var path = "school/"
+
+        schoolListResponse
+            .filter { it.name == selectedSchool }
+            .flatMap {
+                path = path.plus(it.id).plus("/classrooms/")
+                it.classrooms
+            }
+            .filter { it.name == selectedClassroom }
+            .flatMap {
+                path = path.plus(it.id).plus("/students")
+                it.students
+            }
+            .forEachIndexed { i, s ->
+                if (s.name == selectedStudent.name) {
+                    selectedStudent = s
+                }
+            }
+
         originationRepository
-            .transformToEmailAndPasswordAccount(getEmail(), password.get().orEmpty())
+            .transformToEmailAndPasswordAccount(
+                getEmail(),
+                password.get().orEmpty(),
+                selectedStudent,
+                path
+            )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
             .doFinally { loaderVisibility.set(View.GONE) }
             .subscribe(this::onCreatedAccountWithSuccess, this::onCreateAccountError)
             .addTo(compositeDisposable)
@@ -97,7 +123,7 @@ class LoginViewModel(
     }
 
     fun loadClassroomsOptions(newSelectedSchool: String) {
-        fetchDataResponse.filter {
+        schoolListResponse.filter {
             it.name == newSelectedSchool
         }.map {
             it.classrooms.map {
@@ -110,7 +136,7 @@ class LoginViewModel(
     }
 
     fun loadStudentOptions(newSelectedClassroom: String) {
-        fetchDataResponse.filter {
+        schoolListResponse.filter {
             it.name == selectedSchool
         }.map {
             it.classrooms.filter {
@@ -127,7 +153,7 @@ class LoginViewModel(
     }
 
     private fun onSignedWithSuccess(response: FirebaseUser) {
-        navigation.value = LoginNavigation.LOGIN
+        navigation.value = Unit
     }
 
     private fun onError(throwable: Throwable) {
@@ -135,7 +161,7 @@ class LoginViewModel(
     }
 
     private fun onFetchDataSuccess(schools: List<School>) {
-        fetchDataResponse = schools
+        schoolListResponse = schools
         schools.map {
             it.name
         }.also {
@@ -143,7 +169,7 @@ class LoginViewModel(
         }
     }
 
-    private fun getEmail() : String {
+    private fun getEmail(): String {
         return "$selectedSchool.$selectedClassroom.$selectedStudent@email.com".replace(" ", "")
     }
 }

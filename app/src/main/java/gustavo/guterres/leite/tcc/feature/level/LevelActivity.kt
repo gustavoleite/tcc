@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.level
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -11,9 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.transition.Slide
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
+import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelBinding
+import gustavo.guterres.leite.tcc.feature.home.HomeActivity
 import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
+import gustavo.guterres.leite.tcc.utils.extensions.EventObserver
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LevelActivity : AppCompatActivity() {
@@ -26,12 +30,13 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         setupBinding()
-        setupObservers()
 
         val level = intent?.extras?.getParcelable<Level>(LEVEL_EXTRA_ARG)
+        val student = intent?.extras?.getParcelable<Student>(STUDENT_EXTRA_ARG)
 
         buildSteps(level ?: throw Exception("Level not found"))
-        viewModel.setup(level)
+        viewModel.setup(level, student ?: throw Exception("Student not found"))
+        setupObservers()
     }
 
     private fun setupBinding() {
@@ -46,11 +51,20 @@ class LevelActivity : AppCompatActivity() {
             close.observe(this@LevelActivity, Observer {
                 finish()
             })
+
+            student.observe(this@LevelActivity, EventObserver {
+                val intent = Intent().apply {
+                    putExtra(STUDENT_EXTRA_ARG, it)
+                }
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            })
         }
     }
 
     private fun buildSteps(level: Level) {
-        stepsFragment = StepBuilder().getFragmentList(level.steps!!) {
+        stepsFragment = StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Double ->
+            viewModel.setUserAnswer(isRightAnswer, points)
             navigateToNextStep()
         }
         replaceFragment(stepsFragment.first())
@@ -62,7 +76,7 @@ class LevelActivity : AppCompatActivity() {
             if (stepsFragment.size >= currentStep.get()) {
                 replaceFragment(stepsFragment[currentStep.get() - 1])
             } else {
-                finish()
+                viewModel.updateStudentUser()
             }
         }
     }
@@ -87,11 +101,13 @@ class LevelActivity : AppCompatActivity() {
     companion object {
 
         private const val LEVEL_EXTRA_ARG = "LEVEL_EXTRA_ARG"
+        const val STUDENT_EXTRA_ARG = "STUDENT_EXTRA_ARG"
 
-        fun newInstance(from: AppCompatActivity, level: Level): Intent {
+        fun newInstance(from: AppCompatActivity, level: Level, student: Student): Intent {
 
             return Intent(from, LevelActivity::class.java).apply {
                 putExtra(LEVEL_EXTRA_ARG, level)
+                putExtra(STUDENT_EXTRA_ARG, student)
             }
         }
     }

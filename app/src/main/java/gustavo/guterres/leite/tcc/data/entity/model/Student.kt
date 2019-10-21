@@ -5,18 +5,20 @@ import android.os.Parcelable
 import com.google.firebase.database.Exclude
 
 data class Student(
-    val id: String,
-    val name: String,
-    val hits: Int,
-    val mistakes: Int,
-    val currentLevel: String
+    val id: String = "",
+    var name: String = "",
+    var hits: Int = 0,
+    var mistakes: Int = 0,
+    var currentLevel: Int = 0,
+    var accumulatedPoints: Double = 0.0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString().orEmpty()
+        parcel.readInt(),
+        parcel.readDouble()
     ) {
     }
 
@@ -25,7 +27,8 @@ data class Student(
         parcel.writeString(name)
         parcel.writeInt(hits)
         parcel.writeInt(mistakes)
-        parcel.writeString(currentLevel)
+        parcel.writeInt(currentLevel)
+        parcel.writeDouble(accumulatedPoints)
     }
 
     override fun describeContents(): Int {
