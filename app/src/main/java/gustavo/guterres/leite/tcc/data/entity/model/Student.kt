@@ -7,16 +7,14 @@ import com.google.firebase.database.Exclude
 data class Student(
     val id: String = "",
     var name: String = "",
-    var hits: Int = 0,
-    var mistakes: Int = 0,
+    val studentLevel: MutableList<StudentLevel> = arrayListOf(),
     var currentLevel: Int = 0,
     var accumulatedPoints: Double = 0.0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
-        parcel.readInt(),
-        parcel.readInt(),
+        parcel.createTypedArrayList(StudentLevel) ?: arrayListOf(),
         parcel.readInt(),
         parcel.readDouble()
     ) {
@@ -25,8 +23,7 @@ data class Student(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(name)
-        parcel.writeInt(hits)
-        parcel.writeInt(mistakes)
+        parcel.writeTypedList(studentLevel)
         parcel.writeInt(currentLevel)
         parcel.writeDouble(accumulatedPoints)
     }

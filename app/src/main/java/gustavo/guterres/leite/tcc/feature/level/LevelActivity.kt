@@ -12,9 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.transition.Slide
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
-import gustavo.guterres.leite.tcc.data.entity.model.Student
+import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelBinding
-import gustavo.guterres.leite.tcc.feature.home.HomeActivity
 import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
 import gustavo.guterres.leite.tcc.utils.extensions.EventObserver
@@ -31,11 +30,10 @@ class LevelActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         setupBinding()
 
-        val level = intent?.extras?.getParcelable<Level>(LEVEL_EXTRA_ARG)
-        val student = intent?.extras?.getParcelable<Student>(STUDENT_EXTRA_ARG)
+        val playLevel = intent?.extras?.getParcelable<PlayLevel>(LEVEL_EXTRA_ARG)
 
-        buildSteps(level ?: throw Exception("Level not found"))
-        viewModel.setup(level, student ?: throw Exception("Student not found"))
+        buildSteps(playLevel?.level ?: throw Exception("Level not found"))
+        viewModel.setup(playLevel)
         setupObservers()
     }
 
@@ -100,14 +98,13 @@ class LevelActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val LEVEL_EXTRA_ARG = "LEVEL_EXTRA_ARG"
+        const val LEVEL_EXTRA_ARG = "LEVEL_EXTRA_ARG"
         const val STUDENT_EXTRA_ARG = "STUDENT_EXTRA_ARG"
 
-        fun newInstance(from: AppCompatActivity, level: Level, student: Student): Intent {
+        fun newInstance(from: AppCompatActivity, playLevel: PlayLevel): Intent {
 
             return Intent(from, LevelActivity::class.java).apply {
-                putExtra(LEVEL_EXTRA_ARG, level)
-                putExtra(STUDENT_EXTRA_ARG, student)
+                putExtra(LEVEL_EXTRA_ARG, playLevel)
             }
         }
     }

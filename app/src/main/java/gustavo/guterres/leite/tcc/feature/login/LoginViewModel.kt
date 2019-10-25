@@ -170,6 +170,6 @@ class LoginViewModel(
     }
 
     private fun getEmail(): String {
-        return "$selectedSchool.$selectedClassroom.$selectedStudent@email.com".replace(" ", "")
+        return "$selectedSchool.$selectedClassroom.${selectedStudent.name}@email.com".replace(" ", "")
     }
 }
