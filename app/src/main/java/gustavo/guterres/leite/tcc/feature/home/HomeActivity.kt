@@ -3,6 +3,7 @@ package gustavo.guterres.leite.tcc.feature.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil
@@ -43,7 +44,9 @@ class HomeActivity : AppCompatActivity() {
             if (requestCode == HOME_LEVEL_REQUEST_CODE) {
                 viewModel.saveStudentData(data?.getParcelableExtra(LevelActivity.STUDENT_EXTRA_ARG)!!)
             } else if (requestCode == HOME_ONBOARDING_REQUEST_CODE) {
-                navigateToLevel(data?.getParcelableExtra<PlayLevel>(LevelOnboardingActivity.LEVEL_ONBOARDING_EXTRA_ARG)?.level!!)
+                Handler().postDelayed({
+                    navigateToLevel(data?.getParcelableExtra<PlayLevel>(LevelOnboardingActivity.LEVEL_ONBOARDING_EXTRA_ARG)?.level!!)
+                }, 250)
             }
         }
 
@@ -90,7 +93,7 @@ class HomeActivity : AppCompatActivity() {
     fun navigeToOnboarding(level: Level) {
         startActivityForResult(
             LevelOnboardingActivity.newInstance(
-                this@HomeActivity,
+                this,
                 PlayLevel(
                     level,
                     viewModel.authenticatedStudent!!,
@@ -104,7 +107,7 @@ class HomeActivity : AppCompatActivity() {
     fun navigateToLevel(level: Level) {
         val intent =
             LevelActivity.newInstance(
-                this@HomeActivity,
+                this,
                 PlayLevel(
                     level,
                     viewModel.authenticatedStudent!!,
