@@ -31,26 +31,14 @@ class HomeViewModel(
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
     val studentLevel = MutableLiveData<Int>()
+    val logout = MutableLiveData<Unit>()
     val points = ObservableDouble(0.00)
     val accumulatedPoints = ObservableField<String>("R$ 0,00")
     var authenticatedStudent: Student? = null
 
     fun setup() {
         points.addOnPropertyChangedCallback(onPointsChange())
-        fetchLevels()
         fetchStudentData()
-    }
-
-    private fun fetchLevels() {
-        homeRepository
-            .fetchLevelsBrief()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
-            .doFinally { loaderVisibility.set(View.GONE) }
-            .subscribe(this::setLevelBrief, this::onError)
-            .addTo(compositeDisposable)
-
     }
 
     private fun fetchStudentData() {
@@ -58,8 +46,20 @@ class HomeViewModel(
             .fetchStudents()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
             .subscribe(this::onFetchStudentsSuccess, this::onError)
             .addTo(compositeDisposable)
+    }
+
+    private fun fetchLevels() {
+        homeRepository
+            .fetchLevelsBrief()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { loaderVisibility.set(View.GONE) }
+            .subscribe(this::setLevelBrief, this::onError)
+            .addTo(compositeDisposable)
+
     }
 
     fun fetchLevelDetail(id: String) {
@@ -90,6 +90,12 @@ class HomeViewModel(
         }.map {
             authenticatedStudent = it
             updateUI(it)
+            fetchLevels()
+        }
+
+        if (authenticatedStudent == null) {
+            FirebaseAuth.getInstance().signOut()
+            logout.value = Unit
         }
     }
 

@@ -19,6 +19,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.ObservableInt
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
+import gustavo.guterres.leite.tcc.feature.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -78,6 +79,10 @@ class HomeActivity : AppCompatActivity() {
             })
             studentLevel.observe(this@HomeActivity, Observer {
                 listAdapter.studentLevel = ObservableInt(it)
+            })
+            logout.observe(this@HomeActivity, Observer {
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finish()
             })
         }
     }
