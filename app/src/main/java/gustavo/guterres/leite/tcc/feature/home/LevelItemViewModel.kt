@@ -49,9 +49,9 @@ class LevelItemViewModel(
     private fun isLevelEnable() = level.lastLevelUnlocked.get() >= level.itemPosition
 
     private fun handleStars() {
-        level.studentLevel.get()?.hits?.let {
+        level.studentLevel.get()?.hits.let {
             when {
-                it <= 2 && isLevelEnable() -> {
+                (it == null || it <= 2) && isLevelEnable() -> {
                     firstStar.set(resourceProvider.getDrawable(R.drawable.ic_star_2))
                     secondStar.set(resourceProvider.getDrawable(R.drawable.ic_star_2))
                     thirdStar.set(resourceProvider.getDrawable(R.drawable.ic_star_2))
@@ -66,7 +66,7 @@ class LevelItemViewModel(
                     secondStar.set(resourceProvider.getDrawable(R.drawable.ic_star))
                     thirdStar.set(resourceProvider.getDrawable(R.drawable.ic_star_2))
                 }
-                it >= 5 -> {
+                it != null && it >= 5 -> {
                     firstStar.set(resourceProvider.getDrawable(R.drawable.ic_star))
                     secondStar.set(resourceProvider.getDrawable(R.drawable.ic_star))
                     thirdStar.set(resourceProvider.getDrawable(R.drawable.ic_star))
