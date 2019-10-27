@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.levelonboarding
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
 import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
+import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelOnboardingBinding
 import gustavo.guterres.leite.tcc.feature.level.LevelActivity
@@ -20,7 +22,7 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
 
     private lateinit var binding: ActivityLevelOnboardingBinding
     private val totalScreens: Int? by lazy {
-        intent?.extras?.getParcelable<Level>(LEVEL_ONBOARDING_EXTRA_ARG)?.onboardings?.size
+        intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings?.size
     }
     private val viewModel: LevelOnboardingViewModel by viewModel {
         parametersOf(totalScreens)
@@ -43,7 +45,7 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
     private fun setupPageAdapter(): LevelOnboardingPageAdapter {
         return LevelOnboardingPageAdapter(
             supportFragmentManager,
-            intent?.extras?.getParcelable<Level>(LEVEL_ONBOARDING_EXTRA_ARG)?.onboardings!!
+            intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings!!
         )
     }
 
@@ -62,14 +64,11 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
 
     private fun setupObserver() {
         viewModel.okClick.observe(this, Observer {
-            intent?.extras?.getParcelable<Level>(LEVEL_ONBOARDING_EXTRA_ARG)?.let {
-                startActivity(
-                    LevelActivity.newInstance(
-                        this,
-                        it,
-                        intent?.extras?.getParcelable(STUDENT_ONBOARDING_EXTRA_ARG)!!
-                    )
-                )
+            intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.let {
+                val intent = Intent().apply {
+                    putExtra(LEVEL_ONBOARDING_EXTRA_ARG, it)
+                }
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
         })
@@ -77,14 +76,13 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
 
     companion object {
 
-        private const val LEVEL_ONBOARDING_EXTRA_ARG = "LEVEL_ONBOARDING_EXTRA_ARG"
-        private const val STUDENT_ONBOARDING_EXTRA_ARG = "STUDENT_ONBOARDING_EXTRA_ARG"
+        const val LEVEL_ONBOARDING_EXTRA_ARG = "LEVEL_ONBOARDING_EXTRA_ARG"
 
-        fun newInstance(from: AppCompatActivity, level: Level, student: Student): Intent {
+
+        fun newInstance(from: AppCompatActivity, playLevel: PlayLevel): Intent {
 
             return Intent(from, LevelOnboardingActivity::class.java).apply {
-                putExtra(LEVEL_ONBOARDING_EXTRA_ARG, level)
-                putExtra(STUDENT_ONBOARDING_EXTRA_ARG, student)
+                putExtra(LEVEL_ONBOARDING_EXTRA_ARG, playLevel)
             }
         }
     }
