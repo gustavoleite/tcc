@@ -3,21 +3,16 @@ package gustavo.guterres.leite.tcc.feature.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableInt
 import androidx.recyclerview.widget.RecyclerView
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
+import gustavo.guterres.leite.tcc.data.entity.model.LevelItem
 import gustavo.guterres.leite.tcc.databinding.ItemLevelBinding
+import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 
-class LevelItemAdapter : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
+class LevelItemAdapter(private val resourceProvider: ResourceProvider) : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
 
-    var list: List<Level> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    var studentLevel = ObservableInt(0)
+    var list: List<LevelItem> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -27,7 +22,7 @@ class LevelItemAdapter : RecyclerView.Adapter<LevelItemAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
-        val viewModel = LevelItemViewModel(list[position], position, levelClick, studentLevel)
+        val viewModel = LevelItemViewModel(list[position].apply { itemPosition = position }, levelClick, resourceProvider)
         binding.viewModel = viewModel
     }
 

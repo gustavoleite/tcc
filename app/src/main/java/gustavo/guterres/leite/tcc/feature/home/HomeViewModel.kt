@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
+import gustavo.guterres.leite.tcc.data.entity.model.LevelItem
 import gustavo.guterres.leite.tcc.data.entity.model.Student
+import gustavo.guterres.leite.tcc.data.entity.model.StudentLevel
 import gustavo.guterres.leite.tcc.data.repository.HomeRepository
 import gustavo.guterres.leite.tcc.data.repository.StudentRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
@@ -18,6 +20,7 @@ import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import java.lang.IndexOutOfBoundsException
 
 class HomeViewModel(
     private val homeRepository: HomeRepository,
@@ -25,12 +28,13 @@ class HomeViewModel(
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val loaderVisibility = ObservableInt(View.GONE)
+    private val lastLevelUnlocked = ObservableInt()
+    private val hitList = mutableListOf<ObservableField<StudentLevel>>()
 
-    val levelList = MutableLiveData<List<Level>>()
+    val loaderVisibility = ObservableInt(View.GONE)
+    val levelList = MutableLiveData<List<LevelItem>>()
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
-    val studentLevel = MutableLiveData<Int>()
     val logout = MutableLiveData<Unit>()
     val points = ObservableDouble(0.00)
     val accumulatedPoints = ObservableField<String>("R$ 0,00")
@@ -74,6 +78,7 @@ class HomeViewModel(
     }
 
     fun saveStudentData(student: Student) {
+        authenticatedStudent = student
         updateUI(student)
 
         studentRepository
@@ -101,7 +106,12 @@ class HomeViewModel(
 
     private fun updateUI(student: Student) {
         points.set(student.accumulatedPoints)
-        studentLevel.value = student.currentLevel
+        lastLevelUnlocked.set(student.currentLevel)
+
+        if (hitList.size > 0) {
+            val levelId = level.value?.id?.toInt() ?: 0
+            hitList[levelId].set(student.studentLevel[levelId])
+        }
     }
 
     private fun onPointsChange(): Observable.OnPropertyChangedCallback {
@@ -113,7 +123,29 @@ class HomeViewModel(
     }
 
     private fun setLevelBrief(response: List<Level>) {
-        levelList.value = response
+
+        authenticatedStudent?.let { student ->
+            student.studentLevel.map {
+                hitList.add(ObservableField(it))
+            }
+        }
+
+        levelList.value = response.map {
+            LevelItem(
+                it,
+                -1,
+                lastLevelUnlocked,
+                getStudentLevel(it)
+            )
+        }
+    }
+
+    private fun getStudentLevel(it: Level): ObservableField<StudentLevel> {
+        return try {
+            hitList[it.id.toInt()]
+        } catch (indexOutBounds: IndexOutOfBoundsException) {
+            ObservableField()
+        }
     }
 
     private fun setLevel(response: Level) {

@@ -38,7 +38,7 @@ val viewModelModule = module {
 val adaptersModule = module {
     factory { ContentViewItemAdapter(get()) }
     factory { ActionViewItemAdapter(get()) }
-    factory { LevelItemAdapter() }
+    factory { LevelItemAdapter(get()) }
 }
 
 val roomModule = module {

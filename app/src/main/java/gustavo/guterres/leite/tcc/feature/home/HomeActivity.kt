@@ -80,9 +80,6 @@ class HomeActivity : AppCompatActivity() {
             requestInfo.observe(this@HomeActivity, Observer {
                 showMessage(it)
             })
-            studentLevel.observe(this@HomeActivity, Observer {
-                listAdapter.studentLevel = ObservableInt(it)
-            })
             logout.observe(this@HomeActivity, Observer {
                 startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
                 finish()
