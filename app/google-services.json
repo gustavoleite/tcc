@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1017866089573:android:6edd5b5d90aa2d0aa0028c",
+        "android_client_info": {
+          "package_name": "gustavo.guterres.leite.nossodinheiroprofessor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017866089573-d01rliijgum83ad208k6kcm4mfbme822.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gustavo.guterres.leite.nossodinheiroprofessor",
+            "certificate_hash": "ac74ae7175388249776cf69eebf78d898b379ee0"
+          }
+        },
+        {
+          "client_id": "1017866089573-63977hr193vq46lsuo0c85j4g9rqdtp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEvt2i50t19Uyd6o3cWof8v8ZSjzayGrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017866089573-63977hr193vq46lsuo0c85j4g9rqdtp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1017866089573:android:c7573d1dd1905eab",
         "android_client_info": {
           "package_name": "gustavo.guterres.leite.tcc"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1017866089573-t8futul0k1ogblng5dvdj92rt3ej191t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gustavo.guterres.leite.tcc",
+            "certificate_hash": "6662f292da4d4fe52f746843ff9f6105b6a79c97"
+          }
+        },
         {
           "client_id": "1017866089573-gh754lli4gsn9knu6ir9tv7obg384jsf.apps.googleusercontent.com",
           "client_type": 1,
