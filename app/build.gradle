@@ -9,6 +9,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Projetos\\chaves\\tcc_aluno_key.jks')
+            storePassword 'e92rhfe89f'
+            keyAlias = 'tcc-aluno'
+            keyPassword '9023ur9uf'
+        }
+    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "gustavo.guterres.leite.tcc"
@@ -22,9 +30,16 @@ android {
         enabled = true
     }
     buildTypes {
+        debug {
+            resValue "string", "app_name", "[DEBUG] Nosso Dinheiro (Aluno)"
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "Nosso Dinheiro (Aluno)"
         }
     }
 }
@@ -64,9 +79,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     //Firebase
-    implementation "com.google.firebase:firebase-core:$firebase_version"
-    implementation "com.google.firebase:firebase-auth:$firebase_version"
-    implementation "com.google.firebase:firebase-database:$firebase_version"
+    implementation "com.google.firebase:firebase-core:17.2.1"
+    implementation "com.google.firebase:firebase-auth:19.1.0"
+    implementation "com.google.firebase:firebase-database:19.2.0"
 
     //Dots Indicator
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'

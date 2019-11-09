@@ -1,8 +1,10 @@
 package gustavo.guterres.leite.tcc.data.entity.output
 
+import androidx.annotation.Keep
 import com.google.firebase.database.Exclude
 import gustavo.guterres.leite.tcc.data.entity.model.StudentLevel
 
+@Keep
 data class StudentOutput(
     @Exclude var id: String = "",
     val name: String = "",
