@@ -39,20 +39,7 @@ class LoginViewModel(
     lateinit var selectedClassroom: String
     var selectedStudent: Student = Student()
 
-    fun setupFirebaseAuth() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-
-        if (currentUser?.isAnonymous == true) {
-            currentUser.delete()
-            FirebaseAuth.getInstance().signOut()
-        }
-
-        FirebaseAuth.getInstance().currentUser?.let {
-            navigation.value = Unit
-        } ?: fetchData()
-    }
-
-    private fun fetchData() {
+    fun fetchData() {
         loginRepository
             .fetchLoginOptions()
             .subscribeOn(Schedulers.io())

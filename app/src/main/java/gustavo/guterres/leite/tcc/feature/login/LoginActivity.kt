@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
         setupObservers()
-        viewModel.setupFirebaseAuth()
+        viewModel.fetchData()
     }
 
     private fun setupBinding() {
