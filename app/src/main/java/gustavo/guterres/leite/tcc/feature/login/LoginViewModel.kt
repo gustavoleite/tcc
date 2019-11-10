@@ -1,6 +1,7 @@
 package gustavo.guterres.leite.tcc.feature.login
 
 import android.view.View
+import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +27,7 @@ class LoginViewModel(
 
     val password = ObservableField<String>()
     val loaderVisibility = ObservableInt(View.GONE)
+    val contentVisibility = ObservableInt(View.GONE)
 
     val message = MutableLiveData<String>()
     val navigation = MutableLiveData<Unit>()
@@ -44,8 +46,14 @@ class LoginViewModel(
             .fetchLoginOptions()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { loaderVisibility.set(View.VISIBLE) }
-            .doFinally { loaderVisibility.set(View.GONE) }
+            .doOnSubscribe {
+                loaderVisibility.set(View.VISIBLE)
+                contentVisibility.set(View.GONE)
+            }
+            .doFinally {
+                loaderVisibility.set(View.GONE)
+                contentVisibility.set(View.VISIBLE)
+            }
             .subscribe(this::onFetchDataSuccess, this::onError)
             .addTo(compositeDisposable)
     }

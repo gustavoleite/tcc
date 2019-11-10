@@ -32,7 +32,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         >
-        <activity android:name=".feature.SplashActivity"
+        <activity
+            android:name=".feature.SplashActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

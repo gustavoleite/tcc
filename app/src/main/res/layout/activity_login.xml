@@ -3,84 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="gustavo.guterres.leite.tcc.feature.login.LoginViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/pattern_background"
         tools:context=".feature.level.LevelActivity">
-
-        <TextView
-            android:id="@+id/login_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/app_name"
-            android:textColor="@color/secondaryDarkColor"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/login_school_spinner"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_title"/>
-
-        <Spinner
-            android:id="@+id/login_classroom_spinner"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_school_spinner"/>
-
-        <Spinner
-            android:id="@+id/login_student_spinner"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_classroom_spinner"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:hint="@string/origination_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_student_spinner">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:text="@={viewModel.password}" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/login_button"
@@ -97,6 +24,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_nosso_dinheiro"
+            app:layout_constraintEnd_toStartOf="@id/login_title"
+            app:layout_constraintBottom_toBottomOf="@id/login_title"
+            app:layout_constraintTop_toTopOf="@id/login_title"/>
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +46,91 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Spinner
+            android:id="@+id/login_student_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:prompt="@string/student"
+            android:spinnerMode="dialog"
+            android:visibility="@{viewModel.contentVisibility}"
+            app:layout_constraintBottom_toTopOf="@id/login_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_classroom_spinner" />
+
+        <Spinner
+            android:id="@+id/login_school_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:prompt="@string/school"
+            android:spinnerMode="dialog"
+            android:visibility="@{viewModel.contentVisibility}"
+            app:layout_constraintBottom_toTopOf="@id/login_classroom_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_title" />
+
+        <Spinner
+            android:id="@+id/login_classroom_spinner"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:prompt="@string/classroom"
+            android:spinnerMode="dialog"
+            android:visibility="@{viewModel.contentVisibility}"
+            app:layout_constraintBottom_toTopOf="@id/login_student_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_school_spinner" />
+
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/origination_password"
+            android:visibility="@{viewModel.contentVisibility}"
+            app:layout_constraintBottom_toTopOf="@id/login_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_student_spinner">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gustavo.guterres.leite.tcc.feature.login.LoginViewModel" />
+    </data>
 
 </layout>

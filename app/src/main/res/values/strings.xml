@@ -20,4 +20,7 @@
     <string name="login_request_error">Não foi possível autenticar, verifique os seus dados e tente novamente.</string>
 
     <string name="level_onboarding_ok">OK, entendi</string>
+    <string name="school">Escola</string>
+    <string name="classroom">Turma</string>
+    <string name="student">Aluno</string>
 </resources>
