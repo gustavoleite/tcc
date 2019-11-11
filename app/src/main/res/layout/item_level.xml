@@ -70,7 +70,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="48dp"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/montserrat_medium"
             android:text="@{viewModel.text}"
             android:textColor="@color/primaryTextColor"
             android:textSize="20sp"

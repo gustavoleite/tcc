@@ -1,10 +1,9 @@
 package gustavo.guterres.leite.tcc.utils.extensions
 
-import java.text.NumberFormat
-import java.util.*
+fun Double.toPoints(): String {
+    return this.toString().plus(" pontos")
+}
 
-fun Double.toBrCurrency(): String {
-    return NumberFormat
-        .getCurrencyInstance(Locale("pt", "BR"))
-        .format(this)
+fun Double.toPointsWithBreakLine(): String {
+    return this.toString().plus("\npontos")
 }

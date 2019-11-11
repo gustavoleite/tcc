@@ -13,7 +13,7 @@ import gustavo.guterres.leite.tcc.data.repository.LevelRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.Event
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
-import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
+import gustavo.guterres.leite.tcc.utils.extensions.toPoints
 
 class LevelViewModel(
     private val repository: LevelRepository,
@@ -28,7 +28,7 @@ class LevelViewModel(
     val totalStep = ObservableInt()
     val progressInfo = ObservableField<String>()
     val points = ObservableDouble(0.00)
-    val levelAccumulatedPoints = ObservableField<String>("R$ 0,00")
+    val levelAccumulatedPoints = ObservableField<String>("0 pontos")
 
     var levelHits = 0
     var levelMistakes = 0
@@ -98,7 +98,7 @@ class LevelViewModel(
     private fun onPointsChange(): Observable.OnPropertyChangedCallback {
         return object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                levelAccumulatedPoints.set(points.get().toBrCurrency())
+                levelAccumulatedPoints.set(points.get().toPoints())
             }
         }
     }

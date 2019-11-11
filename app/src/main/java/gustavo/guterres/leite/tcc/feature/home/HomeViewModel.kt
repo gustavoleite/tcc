@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.home
 
+import android.content.Intent
 import android.view.View
 import androidx.databinding.Observable
 import androidx.databinding.ObservableDouble
@@ -16,7 +17,8 @@ import gustavo.guterres.leite.tcc.data.repository.HomeRepository
 import gustavo.guterres.leite.tcc.data.repository.StudentRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
-import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
+import gustavo.guterres.leite.tcc.utils.extensions.toPoints
+import gustavo.guterres.leite.tcc.utils.extensions.toPointsWithBreakLine
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
@@ -37,12 +39,17 @@ class HomeViewModel(
     val requestInfo = MutableLiveData<String>()
     val logout = MutableLiveData<Unit>()
     val points = ObservableDouble(0.00)
-    val accumulatedPoints = ObservableField<String>("R$ 0,00")
+    val accumulatedPoints = ObservableField<String>("0\npontos")
     var authenticatedStudent: Student? = null
 
     fun setup() {
         points.addOnPropertyChangedCallback(onPointsChange())
         fetchStudentData()
+    }
+
+    fun onLogoutClick() {
+        FirebaseAuth.getInstance().signOut()
+        logout.value = Unit
     }
 
     private fun fetchStudentData() {
@@ -120,7 +127,7 @@ class HomeViewModel(
     private fun onPointsChange(): Observable.OnPropertyChangedCallback {
         return object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                accumulatedPoints.set(points.get().toBrCurrency())
+                accumulatedPoints.set(points.get().toPointsWithBreakLine())
             }
         }
     }

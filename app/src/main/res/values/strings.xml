@@ -23,4 +23,5 @@
     <string name="school">Escola</string>
     <string name="classroom">Turma</string>
     <string name="student">Aluno</string>
+    <string name="logout">Sair</string>
 </resources>

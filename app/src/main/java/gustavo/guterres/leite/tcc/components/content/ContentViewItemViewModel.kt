@@ -7,7 +7,7 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
 import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
-import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
+import gustavo.guterres.leite.tcc.utils.extensions.toPoints
 
 class ContentViewItemViewModel(item: Spotlight, resourceProvider: ResourceProvider) : ViewModel() {
 
@@ -18,7 +18,7 @@ class ContentViewItemViewModel(item: Spotlight, resourceProvider: ResourceProvid
     init {
         image.set(resourceProvider.getDrawable(item.image))
         item.value?.let {
-            label.set(it.toBrCurrency())
+            label.set(it.toPoints())
             iconVisilibity.set(View.VISIBLE)
         }
     }
