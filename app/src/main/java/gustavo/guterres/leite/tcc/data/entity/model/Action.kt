@@ -2,7 +2,9 @@ package gustavo.guterres.leite.tcc.data.entity.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
 
+@Keep
 data class Action(
 
     val id: String,

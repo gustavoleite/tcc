@@ -2,8 +2,10 @@ package gustavo.guterres.leite.tcc.data.entity.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.google.firebase.database.Exclude
 
+@Keep
 data class StudentLevel(
     var id: String,
     var hits: Int = 0,

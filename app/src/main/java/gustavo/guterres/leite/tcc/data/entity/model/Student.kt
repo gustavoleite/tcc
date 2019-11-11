@@ -2,8 +2,9 @@ package gustavo.guterres.leite.tcc.data.entity.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.database.Exclude
+import androidx.annotation.Keep
 
+@Keep
 data class Student(
     val id: String = "",
     var name: String = "",
