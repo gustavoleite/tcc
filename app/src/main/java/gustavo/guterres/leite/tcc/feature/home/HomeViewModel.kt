@@ -38,7 +38,7 @@ class HomeViewModel(
     val level = MutableLiveData<Level>()
     val requestInfo = MutableLiveData<String>()
     val logout = MutableLiveData<Unit>()
-    val points = ObservableDouble(0.00)
+    val points = ObservableInt(0)
     val accumulatedPoints = ObservableField<String>("0\npontos")
     var authenticatedStudent: Student? = null
 
@@ -112,7 +112,7 @@ class HomeViewModel(
     }
 
     private fun updateUI(student: Student) {
-        points.set(student.accumulatedPoints)
+        points.set(student.accumulatedPoints.toInt())
         lastLevelUnlocked.set(student.currentLevel)
 
         if (hitList.size > 0) {

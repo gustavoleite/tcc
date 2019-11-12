@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -62,8 +63,12 @@ class HomeActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@HomeActivity, 3)
             adapter = listAdapter
         }
-        listAdapter.setItemCallback { level ->
-            viewModel.fetchLevelDetail(level.id)
+        listAdapter.setItemCallback { level, isEnabled ->
+            if (isEnabled) {
+                viewModel.fetchLevelDetail(level.id)
+            } else {
+                showMessage("Acerte ao menos 3 questões no nível anterior para desbloquear este nível.")
+            }
         }
     }
 

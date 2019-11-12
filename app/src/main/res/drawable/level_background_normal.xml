@@ -9,6 +9,6 @@
         android:height="102dp" />
 
     <stroke
-        android:width="2dp"
-        android:color="@color/clean_button_border_color" />
+        android:width="4dp"
+        android:color="@color/primaryDarkColor" />
 </shape>

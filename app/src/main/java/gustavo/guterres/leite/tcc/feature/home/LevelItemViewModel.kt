@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.databinding.ObservableFloat
 import androidx.lifecycle.ViewModel
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Level
@@ -12,7 +13,7 @@ import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 
 class LevelItemViewModel(
     private val level: LevelItem,
-    private var levelClick: ((Level) -> Unit)? = null,
+    private var levelClick: ((Level, Boolean) -> Unit)? = null,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
@@ -22,6 +23,7 @@ class LevelItemViewModel(
     val firstStar = ObservableField<Drawable>()
     val secondStar = ObservableField<Drawable>()
     val thirdStar = ObservableField<Drawable>()
+    val opacity = ObservableFloat(1.0f)
 
     init {
         number.set(level.item.number)
@@ -32,9 +34,7 @@ class LevelItemViewModel(
     }
 
     fun onLevelClick() {
-        if (isLevelEnabled.get()) {
-            levelClick?.invoke(level.item)
-        }
+        levelClick?.invoke(level.item, isLevelEnabled.get())
     }
 
     fun updateItem() {
@@ -44,6 +44,9 @@ class LevelItemViewModel(
 
     private fun handleLevelEnable() {
         isLevelEnabled.set(isLevelEnable())
+        if (!isLevelEnable()) {
+            opacity.set(0.6f)
+        }
     }
 
     private fun isLevelEnable() = level.lastLevelUnlocked.get() >= level.itemPosition

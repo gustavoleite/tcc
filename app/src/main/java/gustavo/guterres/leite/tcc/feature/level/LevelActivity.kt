@@ -61,7 +61,7 @@ class LevelActivity : AppCompatActivity() {
     }
 
     private fun buildSteps(level: Level) {
-        stepsFragment = StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Double ->
+        stepsFragment = StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Int ->
             viewModel.setUserAnswer(isRightAnswer, points)
             navigateToNextStep()
         }

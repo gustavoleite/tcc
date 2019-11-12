@@ -18,7 +18,7 @@ class LevelItemAdapter(private val resourceProvider: ResourceProvider) : Recycle
             notifyDataSetChanged()
         }
 
-    private var levelClick: ((Level) -> Unit)? = null
+    private var levelClick: ((Level, Boolean) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
@@ -39,7 +39,7 @@ class LevelItemAdapter(private val resourceProvider: ResourceProvider) : Recycle
         return ViewHolder(binding)
     }
 
-    fun setItemCallback(itemClick: ((Level) -> Unit)?) {
+    fun setItemCallback(itemClick: ((Level, Boolean) -> Unit)?) {
         this.levelClick = itemClick
     }
 

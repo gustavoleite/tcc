@@ -27,7 +27,7 @@ class LevelViewModel(
     val currentStep = ObservableInt()
     val totalStep = ObservableInt()
     val progressInfo = ObservableField<String>()
-    val points = ObservableDouble(0.00)
+    val points = ObservableInt(0)
     val levelAccumulatedPoints = ObservableField<String>("0 pontos")
 
     var levelHits = 0
@@ -48,7 +48,7 @@ class LevelViewModel(
         close.value = Unit
     }
 
-    fun setUserAnswer(isRightAnswer: Boolean, stepPoints: Double) {
+    fun setUserAnswer(isRightAnswer: Boolean, stepPoints: Int) {
         if (isRightAnswer) {
             this.points.set(this.points.get() + stepPoints)
             levelHits++
