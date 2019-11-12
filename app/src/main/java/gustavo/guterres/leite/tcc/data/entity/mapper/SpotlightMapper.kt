@@ -17,7 +17,7 @@ object SpotlightMapper {
     fun toList(outputList: List<SpotlightOutput>?): List<Spotlight> {
         return outputList?.map {
             toSpotlight(it)
-        } ?: throw Exception("Spolight not found")
+        } ?: arrayListOf()
     }
 
     fun toSpotlight(entity: SpotlightEntity): Spotlight {

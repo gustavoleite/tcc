@@ -46,6 +46,8 @@ class LevelItemViewModel(
         isLevelEnabled.set(isLevelEnable())
         if (!isLevelEnable()) {
             opacity.set(0.6f)
+        } else {
+            opacity.set(1.0f)
         }
     }
 
