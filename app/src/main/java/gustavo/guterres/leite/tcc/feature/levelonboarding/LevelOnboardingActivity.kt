@@ -9,20 +9,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import gustavo.guterres.leite.tcc.R
-import gustavo.guterres.leite.tcc.data.entity.model.Level
-import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
-import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelOnboardingBinding
-import gustavo.guterres.leite.tcc.feature.level.LevelActivity
 import org.koin.core.parameter.parametersOf
 import org.koin.android.viewmodel.ext.android.viewModel
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 
 class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private lateinit var binding: ActivityLevelOnboardingBinding
+    private val onboardingList : List<Onboarding> by lazy {
+        intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings!!
+    }
+
     private val totalScreens: Int? by lazy {
-        intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings?.size
+        intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)
+            ?.level?.onboardings?.size
     }
     private val viewModel: LevelOnboardingViewModel by viewModel {
         parametersOf(totalScreens)
@@ -36,16 +39,33 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
 
         binding.apply {
             viewModel = this@LevelOnboardingActivity.viewModel
-            levelOnboardingViewPager.adapter = setupPageAdapter()
+            setupViewPager()
             levelOnboardingViewPager.addOnPageChangeListener(this@LevelOnboardingActivity)
             levelOnboardingDots.setViewPager(levelOnboardingViewPager)
         }
     }
 
-    private fun setupPageAdapter(): LevelOnboardingPageAdapter {
+    private fun ActivityLevelOnboardingBinding.setupViewPager() {
+        levelOnboardingViewPager.adapter = buildPageAdapter()
+        levelOnboardingViewPager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                viewModel?.currentItem?.value = position
+            }
+        })
+    }
+
+    private fun buildPageAdapter(): LevelOnboardingPageAdapter {
         return LevelOnboardingPageAdapter(
             supportFragmentManager,
-            intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings!!
+            onboardingList
         )
     }
 
@@ -70,6 +90,14 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
                 }
                 setResult(Activity.RESULT_OK, intent)
                 finish()
+            }
+        })
+        viewModel.backClick.observe(this, Observer {
+            finish()
+        })
+        viewModel.currentItem.observe(this, Observer {
+            it?.let {
+                binding.levelOnboardingViewPager?.currentItem = it
             }
         })
     }
