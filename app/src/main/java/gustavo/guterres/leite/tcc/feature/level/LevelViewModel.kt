@@ -1,7 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.level
 
 import androidx.databinding.Observable
-import androidx.databinding.ObservableDouble
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
@@ -57,10 +56,30 @@ class LevelViewModel(
         }
     }
 
+    fun levelUp() = levelHits >= 3 && !hasWonCurrentLevel() && !hasPlayNextLevels()
+
+    fun hasWonCurrentLevel(): Boolean {
+        var won = false
+
+        playLevel
+            .student
+            .studentLevel
+            .filter { it.id == playLevel.level.id }
+            .firstOrNull()?.let {
+                won = it.hits >= 3
+            }
+
+        return won
+    }
+
+    fun hasPlayNextLevels() : Boolean {
+        return playLevel.student.currentLevel > playLevel.level.id.toInt()
+    }
+
     fun updateStudentUser() {
         val newStudentData = playLevel.student.apply {
 
-            if (hasNotLevel(studentLevel)) {
+            if (notPlayCurrentLevelYet(studentLevel)) {
                 studentLevel.add(StudentLevel(playLevel.level.id, 0, 0))
             }
 
@@ -81,7 +100,7 @@ class LevelViewModel(
         student.postValue(Event(newStudentData))
     }
 
-    private fun hasNotLevel(studentLevel: List<StudentLevel>): Boolean {
+    private fun notPlayCurrentLevelYet(studentLevel: List<StudentLevel>): Boolean {
         return studentLevel
             .filter { it.id == playLevel.level.id }
             .isEmpty()

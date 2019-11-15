@@ -3,6 +3,7 @@ package gustavo.guterres.leite.tcc.feature.level
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
 import gustavo.guterres.leite.tcc.utils.extensions.EventObserver
 import org.koin.android.viewmodel.ext.android.viewModel
+import android.animation.Animator
 
 class LevelActivity : AppCompatActivity() {
 
@@ -35,6 +37,7 @@ class LevelActivity : AppCompatActivity() {
         buildSteps(playLevel?.level ?: throw Exception("Level not found"))
         viewModel.setup(playLevel)
         setupObservers()
+        setupAnimation()
     }
 
     private fun setupBinding() {
@@ -61,11 +64,23 @@ class LevelActivity : AppCompatActivity() {
     }
 
     private fun buildSteps(level: Level) {
-        stepsFragment = StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Int ->
-            viewModel.setUserAnswer(isRightAnswer, points)
+        stepsFragment =
+            StepBuilder().getFragmentList(level.steps!!) { isRightAnswer: Boolean, points: Int ->
+                viewModel.setUserAnswer(isRightAnswer, points)
+                showAnimation(isRightAnswer)
+            }
+        replaceFragment(stepsFragment.first())
+    }
+
+    private fun showAnimation(isRightAnswer: Boolean) {
+        if (isRightAnswer) {
+            playAnimation()
+            Handler().postDelayed({
+                navigateToNextStep()
+            }, 1000)
+        } else {
             navigateToNextStep()
         }
-        replaceFragment(stepsFragment.first())
     }
 
     private fun navigateToNextStep() {
@@ -74,9 +89,23 @@ class LevelActivity : AppCompatActivity() {
             if (stepsFragment.size >= currentStep.get()) {
                 replaceFragment(stepsFragment[currentStep.get() - 1])
             } else {
-                viewModel.updateStudentUser()
+                if (viewModel.levelUp()) {
+                    binding.levelAnimation.setAnimation(R.raw.level_up_animation)
+                    playAnimation()
+                    Handler().postDelayed({
+                        viewModel.updateStudentUser()
+                    }, 2000)
+                } else {
+                    viewModel.updateStudentUser()
+                }
+
             }
         }
+    }
+
+    private fun playAnimation() {
+        binding.levelAnimation.playAnimation()
+        binding.levelAnimation.visibility = View.VISIBLE
     }
 
     private fun replaceFragment(newFragment: Fragment) {
@@ -96,16 +125,34 @@ class LevelActivity : AppCompatActivity() {
         //@TODO Implement dialog
     }
 
+    private fun setupAnimation() {
+        binding.levelAnimation.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                binding.levelAnimation.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                binding.levelAnimation.visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+            }
+        })
+    }
+
     companion object {
-
         const val LEVEL_EXTRA_ARG = "LEVEL_EXTRA_ARG"
-        const val STUDENT_EXTRA_ARG = "STUDENT_EXTRA_ARG"
 
+        const val STUDENT_EXTRA_ARG = "STUDENT_EXTRA_ARG"
         fun newInstance(from: AppCompatActivity, playLevel: PlayLevel): Intent {
 
             return Intent(from, LevelActivity::class.java).apply {
                 putExtra(LEVEL_EXTRA_ARG, playLevel)
             }
         }
+
     }
 }

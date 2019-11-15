@@ -118,7 +118,7 @@ class HomeViewModel(
         if (hitList.size > 0) {
             val levelId = level.value?.id?.toInt() ?: 0
             hitList[levelId].set(student.studentLevel[levelId])
-            if (hitList[levelId + 1].get() == null && lastLevelUnlocked.get() == levelId + 1) {
+            if (hitList.getOrNull(levelId + 1) == null && lastLevelUnlocked.get() == levelId + 1) {
                 hitList[levelId + 1].set(StudentLevel((levelId + 1).toString()))
             }
         }

@@ -51,9 +51,6 @@ class StepFragment : Fragment() {
 
     private fun setupObserver() {
         binding.viewModel?.isRightAnswer?.observe(this, Observer { isRightAnswer ->
-            takeIf { isRightAnswer }
-                ?.run { Toast.makeText(this@StepFragment.context, "Resposta correta!", Toast.LENGTH_SHORT).show() }
-                ?: run { Toast.makeText(this@StepFragment.context, "Resposta errada!", Toast.LENGTH_SHORT).show() }
             onStepFinishedCallback?.invoke(isRightAnswer, getStep().points.toInt())
         })
     }

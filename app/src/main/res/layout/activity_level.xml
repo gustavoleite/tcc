@@ -42,6 +42,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/level_feedback_view" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/level_animation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:lottie_speed="0.8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_rawRes="@raw/checked_done_animation" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
