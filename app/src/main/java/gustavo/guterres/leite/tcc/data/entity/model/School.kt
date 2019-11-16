@@ -8,11 +8,13 @@ import androidx.annotation.Keep
 data class School(
     val name: String,
     val classrooms : List<Classroom>,
-    val id: String
+    val id: String,
+    val teacherId: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.createTypedArrayList(Classroom)!!,
+        parcel.readString().orEmpty(),
         parcel.readString().orEmpty()
     ) {
     }
@@ -21,6 +23,7 @@ data class School(
         parcel.writeString(name)
         parcel.writeTypedList(classrooms)
         parcel.writeString(id)
+        parcel.writeString(teacherId)
     }
 
     override fun describeContents(): Int {

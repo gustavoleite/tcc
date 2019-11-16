@@ -18,7 +18,8 @@ object SchoolMapper {
             School(
                 name,
                 ClassroomMapper.toClassroomList(classrooms, studentList),
-                id
+                id,
+                teacherId
             )
         }
     }
