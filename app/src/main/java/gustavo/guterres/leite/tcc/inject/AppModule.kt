@@ -28,7 +28,7 @@ val resourceProviderModule = module {
 
 val viewModelModule = module {
     viewModel { StepViewModel() }
-    viewModel { LevelViewModel(get(), get()) }
+    viewModel { LevelViewModel(get()) }
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { (onboarding: Onboarding) -> OnboardingViewModel(onboarding) }
@@ -42,10 +42,6 @@ val adaptersModule = module {
 }
 
 val roomModule = module {
-
-    single {
-        LevelRepositoryImpl(get()) as LevelRepository
-    }
 
     single {
         Room

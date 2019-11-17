@@ -8,14 +8,12 @@ import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.data.entity.model.StudentLevel
-import gustavo.guterres.leite.tcc.data.repository.LevelRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.Event
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 import gustavo.guterres.leite.tcc.utils.extensions.toPoints
 
 class LevelViewModel(
-    private val repository: LevelRepository,
     private val resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 

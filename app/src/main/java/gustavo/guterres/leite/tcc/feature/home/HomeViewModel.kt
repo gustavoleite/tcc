@@ -118,9 +118,13 @@ class HomeViewModel(
         if (hitList.size > 0) {
             val levelId = level.value?.id?.toInt() ?: 0
             hitList[levelId].set(student.studentLevel[levelId])
-            if (hitList.getOrNull(levelId + 1) == null && lastLevelUnlocked.get() == levelId + 1) {
-                hitList[levelId + 1].set(StudentLevel((levelId + 1).toString()))
-            }
+          /*  if (hitList.getOrNull(levelId + 1) != null && lastLevelUnlocked.get() == levelId + 1) {
+                try {
+                    hitList[levelId + 1].set(StudentLevel((levelId + 1).toString()))
+                } catch (ex: IndexOutOfBoundsException) {
+                    hitList.add(ObservableField(StudentLevel((levelId + 1).toString())))
+                }
+            }*/
         }
     }
 
