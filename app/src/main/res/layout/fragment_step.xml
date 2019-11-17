@@ -15,20 +15,26 @@
         android:layout_height="match_parent"
         android:background="@drawable/pattern_background">
 
-        <gustavo.guterres.leite.tcc.components.content.ContentView
-            android:id="@+id/step_content_view"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cvText="@{viewModel.question}"
-            app:cvTextColor="@color/primaryTextColor"
-            app:cvTextSize="24dp"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="16dp"
             app:layout_constraintBottom_toTopOf="@id/step_action_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:setList="@{viewModel.spotlightList}"
-            tools:layout_height="200dp" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <gustavo.guterres.leite.tcc.components.content.ContentView
+                android:id="@+id/step_content_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cvText="@{viewModel.question}"
+                app:cvTextColor="@color/primaryTextColor"
+                app:cvTextSize="24dp"
+                app:setList="@{viewModel.spotlightList}" />
+
+        </androidx.core.widget.NestedScrollView>
 
         <gustavo.guterres.leite.tcc.components.action.ActionView
             android:id="@+id/step_action_view"

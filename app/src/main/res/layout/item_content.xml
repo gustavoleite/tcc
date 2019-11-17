@@ -49,7 +49,7 @@
             android:layout_below="@+id/cc_item_image"
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/cc_item_icon"
             android:drawablePadding="10dp"
             android:fontFamily="@font/montserrat_regular"
