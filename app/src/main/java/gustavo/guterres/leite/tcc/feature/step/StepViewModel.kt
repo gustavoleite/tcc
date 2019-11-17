@@ -15,20 +15,27 @@ class StepViewModel : BaseViewModel() {
 
     val isRightAnswer = MutableLiveData<Boolean>()
 
-    lateinit var expectedActionId: String
+    lateinit var expectedActionsId: List<String>
+    var selectedActionsId = ArrayList<String>()
 
     fun setup(step: Step) {
         with(step) {
             question.set(content.description)
             spotlightList.set(content.spotlights)
             actionList.set(actions)
-            expectedActionId = rightActionId
+            expectedActionsId = rightActionIdList
         }
     }
 
     fun onActionSelected(action: Action) {
-        isRightAnswer.value = isExpected(action)
+        if (selectedActionsId.none { it == action.id }) {
+            selectedActionsId.add(action.id)
+        } else {
+            selectedActionsId.remove(action.id)
+        }
+
+        isRightAnswer.value = isExpected()
     }
 
-    private fun isExpected(action: Action) = (action.id == expectedActionId)
+    private fun isExpected() = expectedActionsId == selectedActionsId
 }

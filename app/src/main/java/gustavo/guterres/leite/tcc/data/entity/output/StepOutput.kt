@@ -13,5 +13,5 @@ data class StepOutput(
 
     var actions: List<ActionOutput>? = null,
 
-    var rightActionId : Int? = null
+    var rightActionIdList : List<String>? = null
 )

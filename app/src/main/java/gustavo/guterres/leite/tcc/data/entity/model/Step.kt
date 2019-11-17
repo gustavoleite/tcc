@@ -15,7 +15,7 @@ data class Step(
 
     var actions: List<Action>,
 
-    var rightActionId : String
+    var rightActionIdList : List<String>
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -23,7 +23,7 @@ data class Step(
         parcel.readDouble(),
         parcel.readParcelable(Content::class.java.classLoader)!!,
         parcel.createTypedArrayList(Action)!!,
-        parcel.readString().orEmpty()
+        parcel.createStringArrayList()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -31,7 +31,7 @@ data class Step(
         parcel.writeDouble(points)
         parcel.writeParcelable(content, flags)
         parcel.writeTypedList(actions)
-        parcel.writeString(rightActionId)
+        parcel.writeStringList(rightActionIdList)
     }
 
     override fun describeContents(): Int {
