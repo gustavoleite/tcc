@@ -5,24 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.data.entity.model.Level
+import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.databinding.ActivityHomeBinding
 import gustavo.guterres.leite.tcc.feature.level.LevelActivity
 import gustavo.guterres.leite.tcc.feature.levelonboarding.LevelOnboardingActivity
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-import androidx.core.app.ActivityOptionsCompat
-import androidx.databinding.ObservableInt
-import gustavo.guterres.leite.tcc.data.entity.model.Level
-import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.feature.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
@@ -50,7 +48,6 @@ class HomeActivity : AppCompatActivity() {
                 }, 250)
             }
         }
-
     }
 
     private fun setupBinding() {

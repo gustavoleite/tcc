@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
 import gustavo.guterres.leite.tcc.utils.extensions.toBrCurrency
-import gustavo.guterres.leite.tcc.utils.extensions.toPoints
 
 class ContentViewItemViewModel(item: Spotlight, resourceProvider: ResourceProvider) : ViewModel() {
 

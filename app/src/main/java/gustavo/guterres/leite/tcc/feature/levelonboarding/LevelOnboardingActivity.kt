@@ -8,18 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 import gustavo.guterres.leite.tcc.data.entity.model.PlayLevel
 import gustavo.guterres.leite.tcc.databinding.ActivityLevelOnboardingBinding
-import org.koin.core.parameter.parametersOf
 import org.koin.android.viewmodel.ext.android.viewModel
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
+import org.koin.core.parameter.parametersOf
 
 class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private lateinit var binding: ActivityLevelOnboardingBinding
-    private val onboardingList : List<Onboarding> by lazy {
+    private val onboardingList: List<Onboarding> by lazy {
         intent?.extras?.getParcelable<PlayLevel>(LEVEL_ONBOARDING_EXTRA_ARG)?.level?.onboardings!!
     }
 
@@ -105,7 +105,6 @@ class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListe
     companion object {
 
         const val LEVEL_ONBOARDING_EXTRA_ARG = "LEVEL_ONBOARDING_EXTRA_ARG"
-
 
         fun newInstance(from: AppCompatActivity, playLevel: PlayLevel): Intent {
 

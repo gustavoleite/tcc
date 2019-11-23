@@ -4,8 +4,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import gustavo.guterres.leite.tcc.data.entity.model.Action
 import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
-import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.data.entity.model.Step
+import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 
 class StepViewModel : BaseViewModel() {
 

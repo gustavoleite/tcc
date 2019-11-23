@@ -15,7 +15,7 @@ data class Step(
 
     var actions: List<Action>,
 
-    var rightActionId : String
+    var rightActionId: String
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(

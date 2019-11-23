@@ -4,8 +4,8 @@ import androidx.annotation.Keep
 
 @Keep
 data class SchoolOutput(
-    var id : String = "",
-    var teacherId : String = "",
+    var id: String = "",
+    var teacherId: String = "",
     val name: String = "",
-    val classrooms : List<ClassroomOutput> = emptyList()
+    val classrooms: List<ClassroomOutput> = emptyList()
 )

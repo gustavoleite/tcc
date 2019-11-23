@@ -2,6 +2,10 @@ package gustavo.guterres.leite.tcc.feature.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -9,10 +13,6 @@ import com.google.android.material.snackbar.Snackbar
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.feature.home.HomeActivity
 import org.koin.android.viewmodel.ext.android.viewModel
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.AdapterView
-import android.view.View
 
 class LoginActivity : AppCompatActivity() {
 

@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.widget.LinearLayout
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.components.setProgressValueWithAnimation

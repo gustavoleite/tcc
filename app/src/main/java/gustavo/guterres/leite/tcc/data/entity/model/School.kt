@@ -7,7 +7,7 @@ import androidx.annotation.Keep
 @Keep
 data class School(
     val name: String,
-    val classrooms : List<Classroom>,
+    val classrooms: List<Classroom>,
     val id: String,
     val teacherId: String
 ) : Parcelable {

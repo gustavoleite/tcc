@@ -10,13 +10,11 @@ import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
 import gustavo.guterres.leite.tcc.databinding.FragmentOnboardingBinding
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.getViewModel
-import org.koin.core.parameter.ParameterDefinition
 import org.koin.core.parameter.parametersOf
 
 class OnboardingFragment : Fragment() {
 
-    private val extraOnboarding : Onboarding? by lazy { arguments?.getParcelable<Onboarding>(ONBOARDING_EXTRA_ARG) }
+    private val extraOnboarding: Onboarding? by lazy { arguments?.getParcelable<Onboarding>(ONBOARDING_EXTRA_ARG) }
     private val viewModel: OnboardingViewModel by inject { parametersOf(extraOnboarding) }
 
     override fun onCreateView(

@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import gustavo.guterres.leite.tcc.R
-import gustavo.guterres.leite.tcc.data.entity.model.Action
 import gustavo.guterres.leite.tcc.data.entity.model.Step
 import gustavo.guterres.leite.tcc.databinding.FragmentStepBinding
 import org.koin.android.viewmodel.ext.android.getViewModel

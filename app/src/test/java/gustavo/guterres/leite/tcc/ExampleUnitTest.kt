@@ -1,8 +1,7 @@
 package gustavo.guterres.leite.tcc
 
+import junit.framework.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
