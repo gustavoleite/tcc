@@ -17,7 +17,7 @@ class StepViewModel : BaseViewModel() {
 
     lateinit var expectedActionId: String
 
-    fun setup(step: Step) {
+    fun setData(step: Step) {
         with(step) {
             question.set(content.description)
             spotlightList.set(content.spotlights)

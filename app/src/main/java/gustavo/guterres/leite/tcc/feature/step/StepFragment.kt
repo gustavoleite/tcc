@@ -44,7 +44,7 @@ class StepFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        binding.viewModel?.setup(getStep())
+        binding.viewModel?.setData(getStep())
     }
 
     private fun setupObserver() {

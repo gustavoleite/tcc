@@ -35,6 +35,11 @@ android {
             resValue "string", "app_name", "Nosso Dinheiro (Aluno)"
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 ext {
@@ -104,9 +109,13 @@ dependencies {
     //Lottie animations
     implementation 'com.airbnb.android:lottie:3.2.0'
 
+    //Lint
     ktlint "com.pinterest:ktlint:0.35.0"
-
+    //Unit Test
     testImplementation 'junit:junit:4.12'
+    testImplementation "io.mockk:mockk:1.9.3"
+    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
