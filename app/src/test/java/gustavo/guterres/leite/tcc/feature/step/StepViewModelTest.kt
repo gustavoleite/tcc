@@ -34,7 +34,7 @@ class StepViewModelTest : BaseTest() {
     private val step = Step("1", 25.0, content, actionList, "3")
 
     @MockK
-    lateinit var mockIsRightAnswer: Observer<Boolean>
+    private lateinit var mockIsRightAnswer: Observer<Boolean>
 
     @Before
     fun setUp() {
@@ -45,7 +45,7 @@ class StepViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `must set data`() {
+    fun `must set data correctly`() {
         sut.setData(step)
 
         assertThat(sut.question.get(), `is`("Identifique o valor da nota"))
@@ -55,7 +55,18 @@ class StepViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `when select a action must validate if its corret`() {
+    fun `when selecting a wrong action the value must be false`() {
+        sut.setData(step)
+
+        sut.onActionSelected(actionList[1])
+
+        verify {
+            mockIsRightAnswer.onChanged(false)
+        }
+    }
+
+    @Test
+    fun `when selecting a right action the value must be true`() {
         sut.setData(step)
 
         sut.onActionSelected(actionList[2])
