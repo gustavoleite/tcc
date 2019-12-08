@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
@@ -16,7 +15,7 @@ import gustavo.guterres.leite.tcc.databinding.ActivityLevelOnboardingBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class LevelOnboardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
+class LevelOnboardingActivity : AppCompatActivity(), OnPageChangeListener {
 
     private lateinit var binding: ActivityLevelOnboardingBinding
     private val onboardingList: List<Onboarding> by lazy {
