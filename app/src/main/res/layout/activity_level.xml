@@ -18,7 +18,7 @@
 
         <gustavo.guterres.leite.tcc.components.feedback.FeedbackView
             android:id="@+id/level_feedback_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
             app:fvBackgroundDrawable="@drawable/load_progress"
             app:fvCurrentProgress="@{viewModel.currentStep}"
@@ -29,9 +29,23 @@
             app:fvText="@{viewModel.progressInfo}"
             app:fvTextColor="@color/primaryTextColor"
             app:fvTextSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/level_speaker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/level_speaker"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/toque_para_ouvir_o_texto_da_tela"
+            android:onClick="@{() -> viewModel.onSpeakClick()}"
+            android:src="@drawable/ic_speaker"
+            android:layout_marginTop="4dp"
+            android:tint="@color/primaryTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/level_feedback_view"/>
 
         <FrameLayout
             android:id="@+id/level_container_view"
