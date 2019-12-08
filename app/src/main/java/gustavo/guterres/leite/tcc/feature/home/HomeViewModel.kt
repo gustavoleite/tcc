@@ -1,9 +1,7 @@
 package gustavo.guterres.leite.tcc.feature.home
 
-import android.content.Intent
 import android.view.View
 import androidx.databinding.Observable
-import androidx.databinding.ObservableDouble
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +15,6 @@ import gustavo.guterres.leite.tcc.data.repository.HomeRepository
 import gustavo.guterres.leite.tcc.data.repository.StudentRepository
 import gustavo.guterres.leite.tcc.feature.base.BaseViewModel
 import gustavo.guterres.leite.tcc.utils.extensions.resource.ResourceProvider
-import gustavo.guterres.leite.tcc.utils.extensions.toPoints
 import gustavo.guterres.leite.tcc.utils.extensions.toPointsWithBreakLine
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
@@ -70,7 +67,6 @@ class HomeViewModel(
             .doFinally { loaderVisibility.set(View.GONE) }
             .subscribe(this::setLevelBrief, this::onError)
             .addTo(compositeDisposable)
-
     }
 
     fun fetchLevelDetail(id: String) {
@@ -118,13 +114,13 @@ class HomeViewModel(
         if (hitList.size > 0) {
             val levelId = level.value?.id?.toInt() ?: 0
             hitList[levelId].set(student.studentLevel[levelId])
-          /*  if (hitList.getOrNull(levelId + 1) != null && lastLevelUnlocked.get() == levelId + 1) {
-                try {
-                    hitList[levelId + 1].set(StudentLevel((levelId + 1).toString()))
-                } catch (ex: IndexOutOfBoundsException) {
-                    hitList.add(ObservableField(StudentLevel((levelId + 1).toString())))
-                }
-            }*/
+            /*  if (hitList.getOrNull(levelId + 1) != null && lastLevelUnlocked.get() == levelId + 1) {
+                  try {
+                      hitList[levelId + 1].set(StudentLevel((levelId + 1).toString()))
+                  } catch (ex: IndexOutOfBoundsException) {
+                      hitList.add(ObservableField(StudentLevel((levelId + 1).toString())))
+                  }
+              }*/
         }
     }
 

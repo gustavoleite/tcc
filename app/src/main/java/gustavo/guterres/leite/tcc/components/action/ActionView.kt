@@ -3,13 +3,13 @@ package gustavo.guterres.leite.tcc.components.action
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import gustavo.guterres.leite.tcc.R
-import gustavo.guterres.leite.tcc.data.entity.model.Action
-import org.koin.standalone.KoinComponent
-import android.widget.*
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import gustavo.guterres.leite.tcc.R
+import gustavo.guterres.leite.tcc.data.entity.model.Action
 import gustavo.guterres.leite.tcc.databinding.ComponentActionViewBinding
+import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
 class ActionView @JvmOverloads constructor(

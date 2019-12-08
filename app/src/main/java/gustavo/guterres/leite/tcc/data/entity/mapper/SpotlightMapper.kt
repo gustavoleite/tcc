@@ -4,7 +4,6 @@ import gustavo.guterres.leite.tcc.R
 import gustavo.guterres.leite.tcc.data.entity.model.Spotlight
 import gustavo.guterres.leite.tcc.data.entity.output.SpotlightEntity
 import gustavo.guterres.leite.tcc.data.entity.output.SpotlightOutput
-import java.lang.Exception
 
 object SpotlightMapper {
 

@@ -24,7 +24,7 @@ class ContentView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr), KoinComponent {
 
     private val listAdapter: ContentViewItemAdapter by inject()
-    private lateinit var binding : ComponentContentViewBinding
+    private lateinit var binding: ComponentContentViewBinding
 
     init {
         inflateLayout(context)
@@ -90,12 +90,12 @@ class ContentView @JvmOverloads constructor(
         }
     }
 
-   companion object {
+    companion object {
 
-       @JvmStatic
-       @BindingAdapter("cvText")
-       fun setCvText(view: ContentView, cvText: ObservableField<String>) {
-           view.binding.cvTitle.text = cvText.get()
-       }
-   }
+        @JvmStatic
+        @BindingAdapter("cvText")
+        fun setCvText(view: ContentView, cvText: ObservableField<String>) {
+            view.binding.cvTitle.text = cvText.get()
+        }
+    }
 }

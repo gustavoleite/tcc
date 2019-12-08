@@ -1,5 +1,6 @@
 package gustavo.guterres.leite.tcc.feature.level
 
+import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +20,6 @@ import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
 import gustavo.guterres.leite.tcc.utils.extensions.EventObserver
 import org.koin.android.viewmodel.ext.android.viewModel
-import android.animation.Animator
 
 class LevelActivity : AppCompatActivity() {
 
@@ -98,7 +98,6 @@ class LevelActivity : AppCompatActivity() {
                 } else {
                     viewModel.updateStudentUser()
                 }
-
             }
         }
     }
@@ -122,7 +121,7 @@ class LevelActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //@TODO Implement dialog
+        // @TODO Implement dialog
     }
 
     private fun setupAnimation() {
@@ -153,6 +152,5 @@ class LevelActivity : AppCompatActivity() {
                 putExtra(LEVEL_EXTRA_ARG, playLevel)
             }
         }
-
     }
 }

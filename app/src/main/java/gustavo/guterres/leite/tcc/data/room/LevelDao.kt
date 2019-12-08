@@ -1,6 +1,8 @@
 package gustavo.guterres.leite.tcc.data.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import gustavo.guterres.leite.tcc.data.entity.output.LevelEntity
 import io.reactivex.Completable
 import io.reactivex.Single

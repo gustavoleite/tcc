@@ -7,7 +7,14 @@ import gustavo.guterres.leite.tcc.components.action.ActionViewItemAdapter
 import gustavo.guterres.leite.tcc.components.content.ContentViewItemAdapter
 import gustavo.guterres.leite.tcc.components.onboarding.OnboardingViewModel
 import gustavo.guterres.leite.tcc.data.entity.model.Onboarding
-import gustavo.guterres.leite.tcc.data.repository.*
+import gustavo.guterres.leite.tcc.data.repository.LoginRepository
+import gustavo.guterres.leite.tcc.data.repository.LoginRepositoryImpl
+import gustavo.guterres.leite.tcc.data.repository.HomeRepository
+import gustavo.guterres.leite.tcc.data.repository.HomeRepositoryImpl
+import gustavo.guterres.leite.tcc.data.repository.OriginationRepository
+import gustavo.guterres.leite.tcc.data.repository.OriginationRepositoryImpl
+import gustavo.guterres.leite.tcc.data.repository.StudentRepository
+import gustavo.guterres.leite.tcc.data.repository.StudentRepositoryImpl
 import gustavo.guterres.leite.tcc.data.room.TCCDatabase
 import gustavo.guterres.leite.tcc.feature.home.HomeViewModel
 import gustavo.guterres.leite.tcc.feature.home.LevelItemAdapter

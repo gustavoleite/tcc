@@ -1,7 +1,7 @@
 package gustavo.guterres.leite.tcc.utils.extensions
 
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 fun Double.toBrCurrency(): String {
     return NumberFormat

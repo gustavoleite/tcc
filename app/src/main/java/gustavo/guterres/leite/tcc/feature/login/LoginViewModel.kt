@@ -1,11 +1,9 @@
 package gustavo.guterres.leite.tcc.feature.login
 
 import android.view.View
-import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import gustavo.guterres.leite.tcc.R

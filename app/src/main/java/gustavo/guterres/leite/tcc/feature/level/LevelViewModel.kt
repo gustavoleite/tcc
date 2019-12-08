@@ -70,7 +70,7 @@ class LevelViewModel(
         return won
     }
 
-    fun hasPlayNextLevels() : Boolean {
+    fun hasPlayNextLevels(): Boolean {
         return playLevel.student.currentLevel > playLevel.level.id.toInt()
     }
 

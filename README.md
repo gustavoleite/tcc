@@ -12,3 +12,4 @@ Databinding<br>
 RxKotlin<br>
 Room<br>
 Koin<br>
+Firebase<br>

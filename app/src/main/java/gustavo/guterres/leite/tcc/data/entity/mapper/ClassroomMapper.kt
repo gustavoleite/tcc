@@ -3,7 +3,6 @@ package gustavo.guterres.leite.tcc.data.entity.mapper
 import gustavo.guterres.leite.tcc.data.entity.model.Classroom
 import gustavo.guterres.leite.tcc.data.entity.model.Student
 import gustavo.guterres.leite.tcc.data.entity.output.ClassroomOutput
-import gustavo.guterres.leite.tcc.data.entity.output.StudentOutput
 
 object ClassroomMapper {
 
