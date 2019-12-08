@@ -39,4 +39,8 @@ data class Action(
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return text.orEmpty()
+    }
 }

@@ -19,6 +19,7 @@ class LevelViewModel(
 
     val close = MutableLiveData<Unit>()
     val student = MutableLiveData<Event<Student>>()
+    val speak = MutableLiveData<Unit>()
     lateinit var playLevel: PlayLevel
 
     val currentStep = ObservableInt()
@@ -43,6 +44,10 @@ class LevelViewModel(
 
     fun onCloseClick() {
         close.value = Unit
+    }
+
+    fun onSpeakClick() {
+        speak.value = Unit
     }
 
     fun setUserAnswer(isRightAnswer: Boolean, stepPoints: Int) {

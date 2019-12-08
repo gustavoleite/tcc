@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.speech.tts.TextToSpeech
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import gustavo.guterres.leite.tcc.databinding.ActivityLevelBinding
 import gustavo.guterres.leite.tcc.feature.step.StepBuilder
 import gustavo.guterres.leite.tcc.feature.step.StepFragment
 import gustavo.guterres.leite.tcc.utils.extensions.EventObserver
+import gustavo.guterres.leite.tcc.utils.extensions.actionListToString
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LevelActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLevelBinding
     private val viewModel: LevelViewModel by viewModel()
     private lateinit var stepsFragment: List<StepFragment>
+    private lateinit var textToSpeech: TextToSpeech
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,16 @@ class LevelActivity : AppCompatActivity() {
         viewModel.setup(playLevel)
         setupObservers()
         setupAnimation()
+        textToSpeech = TextToSpeech(this, null).apply {
+            setSpeechRate(0.9f)
+        }
+    }
+
+    override fun onDestroy() {
+        textToSpeech.stop()
+        textToSpeech.shutdown()
+
+        super.onDestroy()
     }
 
     private fun setupBinding() {
@@ -59,6 +72,14 @@ class LevelActivity : AppCompatActivity() {
                 }
                 setResult(Activity.RESULT_OK, intent)
                 finish()
+            })
+
+            speak.observe(this@LevelActivity, Observer {
+                intent?.extras?.getParcelable<PlayLevel>(LEVEL_EXTRA_ARG).run {
+                    val currentStep = this?.level?.steps?.get(viewModel.currentStep.get().minus(1))
+                    val tts = currentStep?.content?.description + currentStep?.actions?.actionListToString()
+                    textToSpeech.speak(tts, TextToSpeech.QUEUE_FLUSH, null)
+                }
             })
         }
     }
